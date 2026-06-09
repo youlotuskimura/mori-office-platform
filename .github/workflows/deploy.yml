@@ -22,9 +22,24 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
+
+      # 1) ルートの Vite 版モックアップ → dist/
       - run: npm install
       - run: npm run build
+
+      # 2) Next.js 版モックアップ（静的書き出し）→ mori-office-next/out
+      - run: npm install
+        working-directory: mori-office-next
+      - run: npm run build
+        working-directory: mori-office-next
+        env:
+          DEPLOY_TARGET: gh-pages
+
+      # 3) Next 版を /next/ 配下に同居させる
+      - run: |
+          mkdir -p dist/next
+          cp -r mori-office-next/out/. dist/next/
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
