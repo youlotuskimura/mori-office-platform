@@ -43,12 +43,10 @@ export default function PublicHome({
             <p className="text-[11px] font-semibold uppercase tracking-brand text-gold-400">One ID, One City, One Network</p>
           </div>
           <h1 className="font-serif text-[2.6rem] font-semibold leading-[1.18] tracking-tight sm:text-[4.2rem]">
-            働くを、<span className="text-gold-400">街の体験</span>へ。
+            街が、競争力になる。
           </h1>
           <p className="mt-7 max-w-xl text-base leading-8 text-stone-300 sm:text-lg">
-            ヒルズの全アセットを、ひとつのIDで。
-            <br className="hidden sm:block" />
-            テナント企業とワーカーのための統合プラットフォーム「HILLS ONE」。
+            オフィスを選ぶことは、戦略を選ぶことだ。
           </p>
           <div className="mt-10 flex flex-wrap gap-3">
             <Button variant="gold" onClick={onContact}>
