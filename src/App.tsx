@@ -132,7 +132,7 @@ export default function App() {
 
       {/* モバイル固定CTA（未ログイン時のみ＝常時CV露出） */}
       {!loggedIn && (
-        <div className="fixed inset-x-0 bottom-0 z-30 flex gap-2 border-t border-slate-200 bg-white/95 p-3 backdrop-blur sm:hidden">
+        <div className="fixed inset-x-0 bottom-0 z-30 flex gap-2 border-t border-stone-200 bg-white/95 p-3 backdrop-blur sm:hidden">
           <div className="flex-1">
             <Button variant="outline" full onClick={openContact}>資料DL</Button>
           </div>
@@ -152,10 +152,10 @@ function DemoHint({ loggedIn }: { loggedIn: boolean }) {
   const [show, setShow] = useState(true)
   if (!show) return null
   return (
-    <div className="fixed bottom-20 right-4 z-30 max-w-xs rounded-xl bg-ink-900 p-4 text-xs text-slate-200 shadow-xl sm:bottom-4">
+    <div className="fixed bottom-20 right-4 z-30 max-w-xs rounded-xl bg-ink-900 p-4 text-xs text-stone-200 shadow-xl sm:bottom-4">
       <div className="flex items-start justify-between gap-2">
         <p className="font-bold text-gold-400">モックアップ操作ガイド</p>
-        <button onClick={() => setShow(false)} className="text-slate-400 hover:text-white">×</button>
+        <button onClick={() => setShow(false)} className="text-stone-400 hover:text-white">×</button>
       </div>
       <p className="mt-2 leading-relaxed">
         {loggedIn

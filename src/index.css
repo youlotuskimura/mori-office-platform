@@ -1,3 +1,56 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply bg-stone-50 text-ink-900 font-sans;
+    font-weight: 400;
+  }
+  /* 明朝のディスプレイ書体は字間を少し締めて建築的な品格に */
+  .font-serif {
+    letter-spacing: 0.01em;
+  }
+  ::selection {
+    background: #b59461;
+    color: #fff;
+  }
+  /* 細いスクロールバー（上質さの演出） */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #c8bfb0;
+    border-radius: 9999px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #a89a83;
+    background-clip: content-box;
+  }
+}
+
+@layer components {
+  /* 細いブロンズの罫線（セクションのアクセント） */
+  .rule-bronze {
+    height: 1px;
+    width: 2.5rem;
+    background: linear-gradient(90deg, #b59461, rgba(181, 148, 97, 0));
+  }
+  /* 建築写真のプレースホルダ（深いグリーンの面 + 微細なグリッド） */
+  .archviz {
+    background-color: #1e3a2c;
+    background-image:
+      linear-gradient(135deg, rgba(106, 165, 137, 0.18), rgba(17, 33, 26, 0.9)),
+      linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: cover, 22px 22px, 22px 22px;
+  }
+}

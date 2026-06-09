@@ -44,60 +44,62 @@ export default function Header({
   const nav = loggedIn ? memberNav : publicNav
 
   return (
-    <header className="sticky top-0 z-40 border-b border-white/10 bg-ink-900/95 backdrop-blur">
-      <div className="mx-auto flex h-16 max-w-6xl items-center gap-6 px-5">
-        <button onClick={() => onNav('home')} className="flex items-center gap-2 text-white">
-          <span className="grid h-8 w-8 place-items-center rounded bg-gold-500 font-black text-ink-900">H</span>
-          <span className="text-lg font-bold tracking-wide">
-            HILLS <span className="text-gold-500">ONE</span>
+    <header className="sticky top-0 z-40 border-b border-gold-500/20 bg-ink-900/90 backdrop-blur supports-[backdrop-filter]:bg-ink-900/80">
+      <div className="mx-auto flex h-16 max-w-6xl items-center gap-8 px-5">
+        <button onClick={() => onNav('home')} className="flex items-center gap-2.5 text-white">
+          <span className="grid h-8 w-8 place-items-center rounded border border-gold-500/50 font-serif text-lg font-semibold text-gold-400">
+            H
+          </span>
+          <span className="font-serif text-lg font-semibold tracking-wide">
+            HILLS <span className="text-gold-400">ONE</span>
           </span>
         </button>
 
-        <nav className="hidden flex-1 items-center gap-5 lg:flex">
+        <nav className="hidden flex-1 items-center gap-7 lg:flex">
           {nav.map((n) => (
             <button
               key={n.key}
               onClick={() => onNav(n.key)}
-              className="text-sm font-medium text-slate-200 transition-colors hover:text-gold-400"
+              className="text-sm font-medium tracking-wide text-stone-200/90 transition-colors hover:text-gold-400"
             >
               {n.label}
             </button>
           ))}
         </nav>
 
-        <div className="ml-auto flex items-center gap-2 lg:ml-0">
+        <div className="ml-auto flex items-center gap-3 lg:ml-0">
           {loggedIn ? (
             <>
               {/* ロール切替（モック用） */}
-              <div className="hidden items-center rounded-full bg-white/10 p-0.5 text-xs sm:flex">
+              <div className="hidden items-center rounded-full border border-white/10 bg-white/5 p-0.5 text-xs sm:flex">
                 <button
                   onClick={() => onRoleChange('worker')}
-                  className={`rounded-full px-3 py-1 font-semibold ${role === 'worker' ? 'bg-gold-500 text-ink-900' : 'text-slate-300'}`}
+                  className={`rounded-full px-3 py-1 font-semibold transition-colors ${role === 'worker' ? 'bg-gold-500 text-ink-900' : 'text-stone-300'}`}
                 >
                   ワーカー
                 </button>
                 <button
                   onClick={() => onRoleChange('admin')}
-                  className={`rounded-full px-3 py-1 font-semibold ${role === 'admin' ? 'bg-gold-500 text-ink-900' : 'text-slate-300'}`}
+                  className={`rounded-full px-3 py-1 font-semibold transition-colors ${role === 'admin' ? 'bg-gold-500 text-ink-900' : 'text-stone-300'}`}
                 >
                   企業管理者
                 </button>
               </div>
-              <button className="relative text-slate-200 hover:text-white" title="通知">
-                <span className="text-xl">🔔</span>
-                <span className="absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-rose-500" />
+              <button className="relative text-stone-200 hover:text-white" title="通知">
+                <span className="text-lg">🔔</span>
+                <span className="absolute -right-0.5 -top-0.5 h-1.5 w-1.5 rounded-full bg-gold-400" />
               </button>
-              <button onClick={onLogout} className="text-sm font-medium text-slate-300 hover:text-white">
+              <button onClick={onLogout} className="text-sm font-medium text-stone-300 hover:text-white">
                 ログアウト
               </button>
-              <div className="grid h-9 w-9 place-items-center rounded-full bg-gold-500 font-bold text-ink-900">森</div>
+              <div className="grid h-9 w-9 place-items-center rounded-full border border-gold-500/50 font-serif font-semibold text-gold-400">森</div>
             </>
           ) : (
             <>
-              <button onClick={() => onNav('archive')} className="hidden text-sm font-medium text-slate-200 hover:text-gold-400 sm:block">
+              <button onClick={() => onNav('archive')} className="hidden text-sm font-medium text-stone-200/90 hover:text-gold-400 sm:block">
                 資料ダウンロード
               </button>
-              <button onClick={onLogin} className="text-sm font-medium text-slate-200 hover:text-white">
+              <button onClick={onLogin} className="text-sm font-medium text-stone-200/90 hover:text-white">
                 ログイン
               </button>
               <Button variant="gold" onClick={onContact}>

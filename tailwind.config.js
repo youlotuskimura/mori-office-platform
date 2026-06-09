@@ -4,25 +4,38 @@ export default {
   theme: {
     extend: {
       colors: {
+        // 深いグリーン・チャコール（ヒルズの落ち着いた品格＝ダーク面・本文色）
         ink: {
-          900: '#0b1424',
-          800: '#101d33',
-          700: '#1a2c49',
-          600: '#27406a',
+          900: '#11211a',
+          800: '#16291f',
+          700: '#1e3a2c',
+          600: '#2b5240',
         },
+        // ブランドのシグネチャー・グリーン（自然・ウェルネス＝麻布台ヒルズ）
+        forest: {
+          700: '#2f5d45',
+          600: '#3a6f54',
+          500: '#4a8568',
+          400: '#6aa589',
+          50: '#eef3ef',
+        },
+        // 上質なブロンズ（ラグジュアリーのアクセント＝Hills House / 森リビング）
+        // 既存コードとの互換のため名称は gold を踏襲。
         gold: {
-          400: '#d8bd84',
-          500: '#c8a96a',
-          600: '#b08d4c',
+          400: '#cdb084',
+          500: '#b59461',
+          600: '#9a794a',
         },
       },
       fontFamily: {
-        sans: [
-          '"Hiragino Kaku Gothic ProN"',
-          '"Noto Sans JP"',
-          'system-ui',
-          'sans-serif',
-        ],
+        sans: ['"Noto Sans JP"', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        serif: ['"Shippori Mincho"', '"Noto Serif JP"', 'Georgia', 'serif'],
+      },
+      letterSpacing: {
+        brand: '0.22em',
+      },
+      boxShadow: {
+        card: '0 1px 2px rgba(17,33,26,0.04), 0 8px 24px -16px rgba(17,33,26,0.18)',
       },
     },
   },

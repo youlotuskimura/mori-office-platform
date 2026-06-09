@@ -16,9 +16,9 @@ export default function ContactModal({ open, onClose }: { open: boolean; onClose
       >
         {done ? (
           <div className="p-8 text-center">
-            <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-emerald-100 text-3xl">✓</div>
-            <h3 className="mt-4 text-xl font-bold text-ink-900">送信が完了しました</h3>
-            <p className="mt-2 text-sm text-slate-600">担当より2営業日以内にご連絡します。続けて、オンライン相談の枠もご予約いただけます。</p>
+            <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-forest-50 text-3xl text-forest-600">✓</div>
+            <h3 className="mt-4 font-serif text-xl font-semibold text-ink-900">送信が完了しました</h3>
+            <p className="mt-2 text-sm text-stone-600">担当より2営業日以内にご連絡します。続けて、オンライン相談の枠もご予約いただけます。</p>
             <div className="mt-5 flex flex-col gap-2">
               <Button variant="gold" full onClick={onClose}>オンライン相談を予約する（30分）</Button>
               <Button variant="ghost" full onClick={onClose}>関連資料を見る</Button>
@@ -29,9 +29,9 @@ export default function ContactModal({ open, onClose }: { open: boolean; onClose
             <div className="flex items-center justify-between bg-ink-900 px-6 py-4 text-white">
               <div>
                 <p className="text-xs text-gold-400">無料・30分・営業電話はしません</p>
-                <h3 className="text-lg font-bold">お問い合わせ / 移転相談</h3>
+                <h3 className="font-serif text-lg font-semibold">お問い合わせ / 移転相談</h3>
               </div>
-              <button onClick={onClose} className="text-2xl text-slate-300 hover:text-white">×</button>
+              <button onClick={onClose} className="text-2xl text-stone-300 hover:text-white">×</button>
             </div>
             <div className="space-y-4 p-6">
               <div>
@@ -40,13 +40,13 @@ export default function ContactModal({ open, onClose }: { open: boolean; onClose
                   {purposes.map((p, i) => (
                     <button
                       key={p}
-                      className={`rounded-full border px-3 py-1.5 text-sm ${i === 0 ? 'border-ink-900 bg-ink-900 text-white' : 'border-slate-300 text-slate-600 hover:border-ink-900'}`}
+                      className={`rounded-full border px-3 py-1.5 text-sm ${i === 0 ? 'border-ink-900 bg-ink-900 text-white' : 'border-stone-300 text-stone-600 hover:border-ink-900'}`}
                     >
                       {p}
                     </button>
                   ))}
                 </div>
-                <p className="mt-1 text-xs text-slate-400">※ 内容に応じて最適な担当チームへ自動で振り分けます。</p>
+                <p className="mt-1 text-xs text-stone-400">※ 内容に応じて最適な担当チームへ自動で振り分けます。</p>
               </div>
               {[
                 { l: '会社名', ph: '株式会社サンプル' },
@@ -58,14 +58,14 @@ export default function ContactModal({ open, onClose }: { open: boolean; onClose
                   <label className="mb-1 block text-sm font-semibold text-ink-900">{f.l}</label>
                   <input
                     placeholder={f.ph}
-                    className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-ink-900 focus:outline-none focus:ring-1 focus:ring-ink-900"
+                    className="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm focus:border-ink-900 focus:outline-none focus:ring-1 focus:ring-ink-900"
                   />
                 </div>
               ))}
               <Button variant="gold" full onClick={() => setDone(true)}>
                 この内容で送信する
               </Button>
-              <p className="text-center text-xs text-slate-400">送信により<span className="underline">プライバシーポリシー</span>に同意したものとします。</p>
+              <p className="text-center text-xs text-stone-400">送信により<span className="underline">プライバシーポリシー</span>に同意したものとします。</p>
             </div>
           </>
         )}
