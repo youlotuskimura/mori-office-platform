@@ -2,14 +2,14 @@
 export default function Footer({ loggedIn }: { loggedIn: boolean }) {
   const cols = loggedIn
     ? [
-        { h: 'サービス', items: ['街を使う', 'イベント', 'コミュニティ', 'ウェルネス'] },
-        { h: '管理', items: ['従業員管理', '健康経営', 'ファシリティ', '請求・契約'] },
-        { h: 'サポート', items: ['ヘルプ', '担当に相談', '設定', 'HILLS ID'] },
+        { h: 'Lorem', items: ['Lorem ipsum', 'Dolor sit', 'Amet elit', 'Consectetur'] },
+        { h: 'Ipsum', items: ['Lorem ipsum', 'Dolor sit', 'Amet elit', 'Consectetur'] },
+        { h: 'Dolor', items: ['Lorem ipsum', 'Dolor sit', 'Amet elit', 'Consectetur'] },
       ]
     : [
-        { h: 'オフィス', items: ['拠点一覧', '区画検索', '導入事例', '料金'] },
-        { h: 'プラットフォーム', items: ['できること', '街・カルチャー', 'マッチング', '資料DL'] },
-        { h: '会社情報', items: ['森ビルについて', '採用', 'お問い合わせ', 'プライバシー'] },
+        { h: 'Lorem', items: ['Lorem ipsum', 'Dolor sit', 'Amet elit', 'Consectetur'] },
+        { h: 'Ipsum', items: ['Lorem ipsum', 'Dolor sit', 'Amet elit', 'Consectetur'] },
+        { h: 'Dolor', items: ['Lorem ipsum', 'Dolor sit', 'Amet elit', 'Consectetur'] },
       ]
   return (
     <footer className="bg-ink-900 text-stone-300">
@@ -19,11 +19,11 @@ export default function Footer({ loggedIn }: { loggedIn: boolean }) {
             <span className="grid h-8 w-8 place-items-center rounded border border-gold-500/50 font-serif text-lg font-semibold text-gold-400">H</span>
             <span className="font-serif text-lg font-semibold tracking-wide">HILLS <span className="text-gold-400">ONE</span></span>
           </div>
-          <p className="mt-4 font-serif text-xs italic tracking-wide text-stone-400">One ID, One City, One Network.</p>
+          <p className="mt-4 font-serif text-xs italic tracking-wide text-stone-400">Lorem ipsum dolor sit amet.</p>
           <div className="mt-5 flex gap-2 text-xs">
-            <span className="rounded border border-white/15 px-2 py-1">日本語</span>
-            <span className="rounded border border-white/15 px-2 py-1">EN</span>
-            <span className="rounded border border-white/15 px-2 py-1">中文</span>
+            <span className="rounded border border-white/15 px-2 py-1">Lorem</span>
+            <span className="rounded border border-white/15 px-2 py-1">Ipsum</span>
+            <span className="rounded border border-white/15 px-2 py-1">Dolor</span>
           </div>
         </div>
         {cols.map((c) => (

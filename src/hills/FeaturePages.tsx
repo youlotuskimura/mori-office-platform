@@ -5,13 +5,13 @@ import { Badge, Button, Card, Section, ProgressBar } from './ui'
 // ナビゲーションのリンク先を成立させ、要件を画面で示す。
 
 export function ArchivePage({ onContact, loggedIn }: { onContact: () => void; loggedIn: boolean }) {
-  const filters = ['すべて', 'SUMMIT', 'SEMINAR', 'WELLNESS', 'CULTURE']
+  const filters = ['Lorem', 'IPSUM', 'DOLOR', 'AMET', 'ELIT']
   return (
     <div className="bg-stone-50 min-h-screen">
       <Section
-        eyebrow="Stock #1 / #2"
-        title="イベント＆ラーニング・アーカイブ"
-        desc="開催して終わりにしない。すべての講演・サミットを動画・資料・文字起こし付きで蓄積し、検索・再視聴できる資産にします。"
+        eyebrow="Lorem ipsum"
+        title="Lorem ipsum dolor sit amet"
+        desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore."
       >
         <div className="mb-5 flex flex-wrap gap-2">
           {filters.map((f, i) => (
@@ -38,17 +38,17 @@ export function ArchivePage({ onContact, loggedIn }: { onContact: () => void; lo
                 </div>
               )}
               {!loggedIn && (
-                <p className="mt-3 text-xs text-gold-600">🔒 冒頭のみ視聴可。続きは登録 / 問い合わせ</p>
+                <p className="mt-3 text-xs text-gold-600">🔒 Lorem ipsum dolor sit amet</p>
               )}
             </Card>
           ))}
         </div>
         {!loggedIn && (
           <Card className="mt-8 border-0 bg-ink-900 text-center text-white">
-            <h3 className="font-serif text-xl font-semibold">続きは、無料の資料ダウンロード or ご登録で。</h3>
-            <p className="mt-2 text-sm text-stone-300">フォーム入力でアーカイブ全編がアンロックされます（リードフック）。</p>
+            <h3 className="font-serif text-xl font-semibold">Lorem ipsum dolor sit amet.</h3>
+            <p className="mt-2 text-sm text-stone-300">Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do.</p>
             <div className="mt-4 flex justify-center gap-3">
-              <Button variant="gold" onClick={onContact}>資料をダウンロード（無料）</Button>
+              <Button variant="gold" onClick={onContact}>Lorem ipsum</Button>
             </div>
           </Card>
         )}
@@ -61,13 +61,13 @@ export function MatchingPage({ onContact }: { onContact: () => void }) {
   return (
     <div className="bg-stone-50 min-h-screen">
       <Section
-        eyebrow="Stock #3"
-        title="ビジネスマッチング・ハブ / 虎ノ門サミット常設"
-        desc="入居企業1,200社のネットワークを資産化。協業・発注・採用の募集、商談ログ、サミットのアーカイブを一元管理します。"
+        eyebrow="Lorem ipsum"
+        title="Lorem ipsum dolor sit amet"
+        desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore."
       >
         <div className="grid gap-6 lg:grid-cols-3">
           <div className="lg:col-span-2 space-y-4">
-            <h3 className="font-bold text-ink-900">募集一覧</h3>
+            <h3 className="font-bold text-ink-900">Lorem ipsum</h3>
             {matches.map((m) => (
               <Card key={m.company} className="flex items-center justify-between gap-4">
                 <div>
@@ -82,25 +82,25 @@ export function MatchingPage({ onContact }: { onContact: () => void }) {
                     ))}
                   </div>
                 </div>
-                <Button variant="outline" onClick={onContact}>コンタクト</Button>
+                <Button variant="outline" onClick={onContact}>Lorem</Button>
               </Card>
             ))}
           </div>
           <div className="space-y-4">
             <Card>
-              <h3 className="font-bold text-ink-900">マッチング履歴（ストック）</h3>
-              <p className="mt-1 text-xs text-stone-500">担当交代でも引継げる商談ログ</p>
+              <h3 className="font-bold text-ink-900">Lorem ipsum dolor</h3>
+              <p className="mt-1 text-xs text-stone-500">Lorem ipsum dolor sit amet</p>
               <ul className="mt-3 space-y-2 text-sm text-stone-600">
-                <li className="border-l-2 border-gold-500 pl-2">5/20 D社と初回商談（実証実験）</li>
-                <li className="border-l-2 border-stone-200 pl-2">4/12 E社へ発注見積依頼</li>
-                <li className="border-l-2 border-stone-200 pl-2">3/03 虎ノ門サミットで名刺交換</li>
+                <li className="border-l-2 border-gold-500 pl-2">00/00 Lorem ipsum dolor sit amet</li>
+                <li className="border-l-2 border-stone-200 pl-2">00/00 Consectetur adipiscing elit</li>
+                <li className="border-l-2 border-stone-200 pl-2">00/00 Sed do eiusmod tempor</li>
               </ul>
             </Card>
             <Card className="bg-ink-900 text-white">
-              <h3 className="font-bold">コンシェルジュ仲介</h3>
-              <p className="mt-2 text-sm text-stone-300">森ビルが最適な企業をご紹介します。</p>
+              <h3 className="font-bold">Lorem ipsum</h3>
+              <p className="mt-2 text-sm text-stone-300">Lorem ipsum dolor sit amet consectetur.</p>
               <div className="mt-3">
-                <Button variant="gold" full onClick={onContact}>仲介を依頼</Button>
+                <Button variant="gold" full onClick={onContact}>Lorem ipsum</Button>
               </div>
             </Card>
           </div>
@@ -112,22 +112,22 @@ export function MatchingPage({ onContact }: { onContact: () => void }) {
 
 export function HealthPage() {
   const depts = [
-    { d: '営業部', s: 78 }, { d: '開発部', s: 71 }, { d: '管理部', s: 84 }, { d: 'CS部', s: 69 },
+    { d: 'Lorem', s: 78 }, { d: 'Ipsum', s: 71 }, { d: 'Dolor', s: 84 }, { d: 'Amet', s: 69 },
   ]
   return (
     <div className="bg-stone-50 min-h-screen">
       <Section
-        eyebrow="Stock #4"
-        title="健康経営ダッシュボード"
-        desc="従業員の健康・運動・イベント参加・満足度を経年で可視化。契約継続のROIを数値で示し、解約理由を潰します。"
+        eyebrow="Lorem ipsum"
+        title="Lorem ipsum dolor sit"
+        desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore."
       >
         <div className="grid gap-5 sm:grid-cols-3">
-          <Card><p className="text-sm text-stone-500">総合スコア</p><p className="mt-2 font-serif text-4xl font-semibold text-ink-900">76</p><Badge tone="green">前年比 +9</Badge></Card>
-          <Card><p className="text-sm text-stone-500">同業ベンチマーク</p><p className="mt-2 font-serif text-4xl font-semibold text-ink-900">上位23%</p><Badge tone="green">同規模テナント中</Badge></Card>
-          <Card><p className="text-sm text-stone-500">イベント参加率</p><p className="mt-2 font-serif text-4xl font-semibold text-ink-900">61%</p><Badge tone="green">+12pt</Badge></Card>
+          <Card><p className="text-sm text-stone-500">Lorem ipsum</p><p className="mt-2 font-serif text-4xl font-semibold text-ink-900">00</p><Badge tone="green">Lorem +0</Badge></Card>
+          <Card><p className="text-sm text-stone-500">Dolor sit amet</p><p className="mt-2 font-serif text-4xl font-semibold text-ink-900">00%</p><Badge tone="green">Lorem ipsum</Badge></Card>
+          <Card><p className="text-sm text-stone-500">Consectetur elit</p><p className="mt-2 font-serif text-4xl font-semibold text-ink-900">00%</p><Badge tone="green">+0pt</Badge></Card>
         </div>
         <Card className="mt-6">
-          <p className="mb-4 text-sm font-semibold text-ink-900">部署別スコア（個人特定不可の集計値）</p>
+          <p className="mb-4 text-sm font-semibold text-ink-900">Lorem ipsum dolor sit amet consectetur</p>
           <div className="space-y-3">
             {depts.map((h) => (
               <div key={h.d} className="flex items-center gap-3">
@@ -140,8 +140,8 @@ export function HealthPage() {
             ))}
           </div>
           <div className="mt-5 flex gap-2">
-            <Button variant="primary">健康経営優良法人 申請レポートを出力</Button>
-            <Button variant="outline">CSV / PDF ダウンロード</Button>
+            <Button variant="primary">Lorem ipsum dolor sit</Button>
+            <Button variant="outline">Dolor sit amet</Button>
           </div>
         </Card>
       </Section>

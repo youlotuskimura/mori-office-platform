@@ -39,64 +39,64 @@ export default function App() {
     if (page === 'city')
       return (
         <SimplePage
-          title="街を使う（回遊）"
-          desc="商業・飲食のモバイルオーダー、美術館・展望台のワーカー特典、館内ナビ・会議室予約をHILLS IDで。"
+          title="Lorem ipsum dolor sit"
+          desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."
           items={[
-            { icon: '🍽️', t: 'モバイルオーダー・優待', d: '館内飲食を事前注文・テナント割引。' },
-            { icon: '🖼️', t: '美術館・展望台 特典', d: '社員価格のチケットと限定鑑賞会。' },
-            { icon: '🧭', t: '館内ナビ・会議室予約', d: '混雑状況とラウンジ・会議室の空き予約。' },
-            { icon: '🏛️', t: '会員制クラブ', d: '会員ランクに応じたクラブ・ラウンジ利用。' },
-            { icon: '🚶', t: '回遊パスポート', d: '街の利用履歴を蓄積しレコメンド。' },
-            { icon: '💳', t: 'HILLS ID ウォレット', d: 'ポイント・特典・電子社員証を一元管理。' },
+            { icon: '🍽️', t: 'Lorem ipsum', d: 'Lorem ipsum dolor sit amet.' },
+            { icon: '🖼️', t: 'Dolor sit amet', d: 'Consectetur adipiscing elit sed.' },
+            { icon: '🧭', t: 'Consectetur elit', d: 'Ut enim ad minim veniam quis.' },
+            { icon: '🏛️', t: 'Adipiscing sed', d: 'Duis aute irure dolor in.' },
+            { icon: '🚶', t: 'Tempor incididunt', d: 'Excepteur sint occaecat cupidatat.' },
+            { icon: '💳', t: 'Labore dolore', d: 'Sed do eiusmod tempor incididunt.' },
           ]}
         />
       )
     if (page === 'community')
       return (
         <SimplePage
-          title="コミュニティ（ワーカーSNS）"
-          desc="興味タグ・部活・テーマ別グループ、1on1ランチマッチング、スキルシェアでワーカー同士をつなぐ。"
+          title="Lorem ipsum dolor"
+          desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor."
           items={[
-            { icon: '🏃', t: '部活・興味グループ', d: 'ランニング、読書、勉強会など。' },
-            { icon: '🍱', t: 'ランチマッチング', d: '別テナントの人と共通の興味でマッチ。' },
-            { icon: '💡', t: 'スキルシェア', d: '社外の知見を気軽に交換。' },
-            { icon: '📣', t: 'タイムライン・掲示板', d: 'グループの新着・告知をフィード表示。' },
+            { icon: '🏃', t: 'Lorem ipsum', d: 'Lorem ipsum dolor sit amet.' },
+            { icon: '🍱', t: 'Dolor sit amet', d: 'Consectetur adipiscing elit.' },
+            { icon: '💡', t: 'Consectetur', d: 'Ut enim ad minim veniam.' },
+            { icon: '📣', t: 'Adipiscing elit', d: 'Duis aute irure dolor in.' },
           ]}
         />
       )
     if (page === 'search')
       return (
         <SimplePage
-          title="オフィスを探す"
-          desc="拠点・面積・賃料レンジで検討。事例とともに、内見・オンライン相談へ。"
+          title="Lorem ipsum dolor sit"
+          desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod."
           items={[
-            { icon: '🏙️', t: '拠点一覧', d: '虎ノ門 / 麻布台 / 六本木 ほか。' },
-            { icon: '📐', t: '区画・面積検索', d: '坪数・賃料レンジで絞り込み。' },
-            { icon: '📈', t: '導入事例', d: '入居企業の成果を定量で。' },
+            { icon: '🏙️', t: 'Lorem ipsum', d: 'Lorem ipsum dolor sit amet.' },
+            { icon: '📐', t: 'Dolor sit amet', d: 'Consectetur adipiscing elit.' },
+            { icon: '📈', t: 'Consectetur', d: 'Ut enim ad minim veniam.' },
           ]}
         />
       )
     if (page === 'features')
       return (
         <SimplePage
-          title="プラットフォームでできること"
-          desc="ワーカー・総務人事・経営層、それぞれの価値を統合IDで提供します。"
+          title="Lorem ipsum dolor"
+          desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor."
           items={[
-            { icon: '👤', t: 'ワーカー向け', d: '文化・健康・回遊・コミュニティ。' },
-            { icon: '🧑‍💼', t: '総務・人事向け', d: '管理・福利厚生・健康経営の可視化。' },
-            { icon: '🏢', t: '経営層向け', d: 'ビジネスマッチング・ブランド・採用力。' },
+            { icon: '👤', t: 'Lorem ipsum', d: 'Lorem ipsum dolor sit amet.' },
+            { icon: '🧑‍💼', t: 'Dolor sit amet', d: 'Consectetur adipiscing elit.' },
+            { icon: '🏢', t: 'Consectetur', d: 'Ut enim ad minim veniam.' },
           ]}
         />
       )
     if (page === 'culture')
       return (
         <SimplePage
-          title="ヒルズの街・カルチャー"
-          desc="美術館・展望台・会員制クラブなど、森ビルだけの文化資産。"
+          title="Lorem ipsum dolor sit"
+          desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod."
           items={[
-            { icon: '🎨', t: '美術館', d: 'アートとビジネスが交差する日常。' },
-            { icon: '🌃', t: '展望台 / TOKYO NODE', d: '眺望と体験型コンテンツ。' },
-            { icon: '🥂', t: '会員制クラブ', d: 'ビジネスと交流の特別な場。' },
+            { icon: '🎨', t: 'Lorem ipsum', d: 'Lorem ipsum dolor sit amet.' },
+            { icon: '🌃', t: 'Dolor sit amet', d: 'Consectetur adipiscing elit.' },
+            { icon: '🥂', t: 'Consectetur', d: 'Ut enim ad minim veniam.' },
           ]}
         />
       )
@@ -134,10 +134,10 @@ export default function App() {
       {!loggedIn && (
         <div className="fixed inset-x-0 bottom-0 z-30 flex gap-2 border-t border-stone-200 bg-white/95 p-3 backdrop-blur sm:hidden">
           <div className="flex-1">
-            <Button variant="outline" full onClick={openContact}>資料DL</Button>
+            <Button variant="outline" full onClick={openContact}>Lorem</Button>
           </div>
           <div className="flex-1">
-            <Button variant="gold" full onClick={openContact}>相談する</Button>
+            <Button variant="gold" full onClick={openContact}>Ipsum</Button>
           </div>
         </div>
       )}

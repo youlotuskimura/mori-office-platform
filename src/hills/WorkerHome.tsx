@@ -8,9 +8,9 @@ export default function WorkerHome({ onNav }: { onNav: (key: string) => void }) 
       {/* 1-2. パーソナルヘッダー + クイックアクション */}
       <div className="bg-ink-900 text-white">
         <div className="mx-auto max-w-6xl px-5 py-10">
-          <p className="text-xs font-medium uppercase tracking-[0.18em] text-gold-400/90">麻布台ヒルズ 森JPタワー 32F</p>
+          <p className="text-xs font-medium uppercase tracking-[0.18em] text-gold-400/90">Lorem ipsum dolor sit</p>
           <h1 className="mt-2 font-serif text-2xl font-semibold sm:text-3xl">
-            こんにちは、森 太郎さん <span className="font-sans text-base font-normal text-stone-400">/ 株式会社サンプル</span>
+            Lorem ipsum dolor <span className="font-sans text-base font-normal text-stone-400">/ Consectetur adipiscing</span>
           </h1>
           <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
             {workerQuickActions.map((a) => (
@@ -24,14 +24,14 @@ export default function WorkerHome({ onNav }: { onNav: (key: string) => void }) 
             ))}
           </div>
           <div className="mt-4 flex items-center gap-4 text-sm text-stone-300">
-            <span>💳 HILLS ID ウォレット残高 <span className="font-bold text-gold-400">¥3,200</span></span>
-            <span>🏅 入居 7年目 ゴールド会員</span>
+            <span>💳 Lorem ipsum dolor <span className="font-bold text-gold-400">¥0,000</span></span>
+            <span>🏅 Lorem ipsum dolor sit</span>
           </div>
         </div>
       </div>
 
       {/* 3. 今日のレコメンド（回遊喚起） */}
-      <Section eyebrow="For You" title="今日のおすすめ" className="!py-10">
+      <Section eyebrow="Lorem ipsum" title="Lorem ipsum dolor sit" className="!py-10">
         <div className="grid gap-4 sm:grid-cols-3">
           {recommendations.map((r) => (
             <Card key={r.title} className="flex items-start gap-3">
@@ -49,9 +49,9 @@ export default function WorkerHome({ onNav }: { onNav: (key: string) => void }) 
         {/* 4. イベント＆アーカイブ */}
         <div className="lg:col-span-2">
           <div className="mb-3 flex items-center justify-between">
-            <h2 className="font-serif text-xl font-semibold text-ink-900">イベント＆ラーニング</h2>
+            <h2 className="font-serif text-xl font-semibold text-ink-900">Lorem ipsum dolor</h2>
             <button onClick={() => onNav('archive')} className="text-sm font-semibold text-gold-600 hover:underline">
-              すべて見る →
+              Lorem →
             </button>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
@@ -66,7 +66,7 @@ export default function WorkerHome({ onNav }: { onNav: (key: string) => void }) 
                 {a.progress > 0 && (
                   <div className="mt-3">
                     <ProgressBar value={a.progress} />
-                    <p className="mt-1 text-xs text-stone-400">{a.progress === 100 ? '視聴済み' : `続きから（${a.progress}%）`}</p>
+                    <p className="mt-1 text-xs text-stone-400">{a.progress === 100 ? 'Lorem ipsum' : `Lorem ${a.progress}%`}</p>
                   </div>
                 )}
               </Card>
@@ -78,13 +78,13 @@ export default function WorkerHome({ onNav }: { onNav: (key: string) => void }) 
         <div className="space-y-6">
           <div>
             <div className="mb-3 flex items-center justify-between">
-              <h2 className="font-serif text-xl font-semibold text-ink-900">コミュニティ</h2>
+              <h2 className="font-serif text-xl font-semibold text-ink-900">Lorem ipsum</h2>
               <button onClick={() => onNav('community')} className="text-sm font-semibold text-gold-600 hover:underline">
-                開く →
+                Lorem →
               </button>
             </div>
             <Card>
-              <p className="mb-2 text-xs font-semibold text-stone-500">ランチマッチング候補</p>
+              <p className="mb-2 text-xs font-semibold text-stone-500">Lorem ipsum dolor</p>
               {lunchMatches.map((l) => (
                 <div key={l.name} className="flex items-center gap-3 border-b border-stone-100 py-2 last:border-0">
                   <div className="grid h-9 w-9 place-items-center rounded-full bg-gold-500/20 text-sm font-bold text-gold-600">
@@ -94,7 +94,7 @@ export default function WorkerHome({ onNav }: { onNav: (key: string) => void }) 
                     <p className="text-sm font-semibold text-ink-900">{l.name}</p>
                     <p className="text-xs text-stone-500">{l.common}</p>
                   </div>
-                  <button className="text-xs font-semibold text-gold-600">誘う</button>
+                  <button className="text-xs font-semibold text-gold-600">Lorem</button>
                 </div>
               ))}
               <div className="mt-3 space-y-2">
@@ -109,21 +109,21 @@ export default function WorkerHome({ onNav }: { onNav: (key: string) => void }) 
           </div>
 
           <div>
-            <h2 className="mb-3 font-serif text-xl font-semibold text-ink-900">My ウェルネス</h2>
+            <h2 className="mb-3 font-serif text-xl font-semibold text-ink-900">Lorem ipsum</h2>
             <Card>
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="font-serif text-3xl font-semibold text-ink-900">8,420<span className="font-sans text-sm font-normal text-stone-500"> 歩</span></p>
-                  <p className="text-xs text-stone-500">今日の歩数</p>
+                  <p className="font-serif text-3xl font-semibold text-ink-900">0,000<span className="font-sans text-sm font-normal text-stone-500"> lorem</span></p>
+                  <p className="text-xs text-stone-500">Lorem ipsum</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-sm font-semibold text-forest-600">イベント参加 12回</p>
-                  <p className="text-xs text-stone-500">次回健診：7/15</p>
+                  <p className="text-sm font-semibold text-forest-600">Lorem ipsum 00</p>
+                  <p className="text-xs text-stone-500">Lorem：00/00</p>
                 </div>
               </div>
               <div className="mt-4">
                 <Button variant="outline" full onClick={() => onNav('city')}>
-                  ジム・クリニックを予約
+                  Lorem ipsum dolor
                 </Button>
               </div>
             </Card>
@@ -135,11 +135,11 @@ export default function WorkerHome({ onNav }: { onNav: (key: string) => void }) 
       <div className="bg-gradient-to-r from-gold-600 to-gold-500">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-5 py-8 text-ink-900">
           <div>
-            <p className="text-sm font-semibold">🏅 ロイヤリティ・ステータス</p>
-            <p className="font-serif text-xl font-semibold">ゴールド会員（入居7年）— 周年特典が利用可能です</p>
+            <p className="text-sm font-semibold">🏅 Lorem ipsum dolor</p>
+            <p className="font-serif text-xl font-semibold">Lorem ipsum dolor sit amet, consectetur adipiscing</p>
           </div>
           <Button variant="primary" onClick={() => onNav('city')}>
-            限定クラブ・特典を見る
+            Lorem ipsum dolor
           </Button>
         </div>
       </div>

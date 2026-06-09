@@ -10,19 +10,19 @@ export default function AdminHome({
   onNav: (key: string) => void
 }) {
   const kpis = [
-    { label: 'サービス利用率', value: '74%', trend: '+6pt', good: true },
-    { label: '健康経営スコア', value: '76', trend: '+3', good: true },
-    { label: '従業員登録', value: '312 / 340', trend: '92%', good: true },
-    { label: '契約更新まで', value: '88日', trend: '要対応', good: false },
+    { label: 'Lorem ipsum', value: '00%', trend: '+0pt', good: true },
+    { label: 'Dolor sit', value: '00', trend: '+0', good: true },
+    { label: 'Amet elit', value: '000 / 000', trend: '00%', good: true },
+    { label: 'Consectetur', value: '00 lorem', trend: 'Lorem', good: false },
   ]
 
   return (
     <div className="bg-stone-50">
       <div className="bg-ink-900 text-white">
         <div className="mx-auto max-w-6xl px-5 py-10">
-          <p className="text-xs font-medium uppercase tracking-[0.18em] text-gold-400/90">企業管理ポータル</p>
+          <p className="text-xs font-medium uppercase tracking-[0.18em] text-gold-400/90">Lorem ipsum dolor</p>
           <h1 className="mt-2 font-serif text-2xl font-semibold sm:text-3xl">
-            株式会社サンプル <span className="font-sans text-base font-normal text-stone-400">/ 総務人事ご担当者さま</span>
+            Lorem ipsum dolor <span className="font-sans text-base font-normal text-stone-400">/ Consectetur adipiscing elit</span>
           </h1>
           <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
             {adminQuickActions.map((a) => (
@@ -36,7 +36,7 @@ export default function AdminHome({
       </div>
 
       {/* 法人ダッシュボード KPI */}
-      <Section eyebrow="Insights" title="法人ダッシュボード" className="!py-10">
+      <Section eyebrow="Lorem ipsum" title="Lorem ipsum dolor sit" className="!py-10">
         <div className="grid gap-4 sm:grid-cols-4">
           {kpis.map((k) => (
             <Card key={k.label}>
@@ -52,13 +52,13 @@ export default function AdminHome({
         {/* 健康経営ダッシュボード（解約防止の証拠） */}
         <div className="lg:col-span-2">
           <div className="mb-3 flex items-center justify-between">
-            <h2 className="font-serif text-xl font-semibold text-ink-900">健康経営ダッシュボード</h2>
+            <h2 className="font-serif text-xl font-semibold text-ink-900">Lorem ipsum dolor</h2>
             <button onClick={() => onNav('health')} className="text-sm font-semibold text-gold-600 hover:underline">
-              詳細・レポート出力 →
+              Lorem ipsum →
             </button>
           </div>
           <Card>
-            <p className="mb-4 text-xs text-stone-500">部署別 健康経営スコア（前月比・個人特定不可の集計値）</p>
+            <p className="mb-4 text-xs text-stone-500">Lorem ipsum dolor sit amet consectetur adipiscing</p>
             <div className="space-y-3">
               {healthScores.map((h) => (
                 <div key={h.dept} className="flex items-center gap-3">
@@ -74,11 +74,11 @@ export default function AdminHome({
               ))}
             </div>
             <div className="mt-5 rounded-lg border border-gold-500/20 bg-gold-500/[0.07] p-3 text-sm text-ink-700">
-              💡 CS部のスコアが低下。運動系イベントの案内を自動提案できます。
+              💡 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             </div>
             <div className="mt-4 flex gap-2">
-              <Button variant="outline" onClick={() => onNav('health')}>健康経営優良法人 申請レポート</Button>
-              <Button variant="ghost" onClick={() => onNav('health')}>同業ベンチマーク比較</Button>
+              <Button variant="outline" onClick={() => onNav('health')}>Lorem ipsum dolor</Button>
+              <Button variant="ghost" onClick={() => onNav('health')}>Dolor sit amet</Button>
             </div>
           </Card>
         </div>
@@ -87,9 +87,9 @@ export default function AdminHome({
         <div className="space-y-6">
           <div>
             <div className="mb-3 flex items-center justify-between">
-              <h2 className="font-serif text-xl font-semibold text-ink-900">マッチング新着</h2>
+              <h2 className="font-serif text-xl font-semibold text-ink-900">Lorem ipsum</h2>
               <button onClick={() => onNav('matching')} className="text-sm font-semibold text-gold-600 hover:underline">
-                開く →
+                Lorem →
               </button>
             </div>
             <Card>
@@ -112,13 +112,13 @@ export default function AdminHome({
 
           {/* アップセル / 解約防止 CTA */}
           <Card className="border-gold-500/40 bg-gold-500/5">
-            <p className="text-sm font-bold text-ink-900">📈 担当コンシェルジュから</p>
+            <p className="text-sm font-bold text-ink-900">📈 Lorem ipsum dolor</p>
             <p className="mt-2 text-sm text-stone-600">
-              利用率が好調です。増床・健康経営プランの拡張をご提案できます。契約更新も近づいています。
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.
             </p>
             <div className="mt-4">
               <Button variant="gold" full onClick={onContact}>
-                担当に相談する
+                Lorem ipsum
               </Button>
             </div>
           </Card>

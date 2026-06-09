@@ -11,15 +11,15 @@ export default function PublicHome({
   onNav: (key: string) => void
 }) {
   const tabs = [
-    { key: 'exec', label: '移転検討の総務・経営の方へ', copy: '街全体を、自社のオフィスに。立地・面積・働き方を、ひとつの窓口で。' },
-    { key: 'hr', label: '健康経営担当の方へ', copy: '従業員の健康とエンゲージメントを、データで可視化し改善する。' },
-    { key: 'worker', label: '働くワーカーの方へ', copy: '美術館も展望台も会議室も。ひとつのIDで、街がオフィスになる。' },
+    { key: 'exec', label: 'Lorem ipsum dolor sit', copy: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod.' },
+    { key: 'hr', label: 'Consectetur adipiscing', copy: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
+    { key: 'worker', label: 'Tempor incididunt', copy: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.' },
   ]
   const [tab, setTab] = useState(0)
   const values = [
-    { icon: '🎨', t: 'Culture', d: '美術館・展望台・会員制クラブ。ヒルズの文化資産を統合IDで。' },
-    { icon: '🤝', t: 'Business', d: '入居企業同士のビジネスマッチング。虎ノ門サミットを常設化。' },
-    { icon: '🏅', t: 'Loyalty', d: '長期入居・周年企業への特別プログラムと限定特典。' },
+    { icon: '🎨', t: 'Lorem', d: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do.' },
+    { icon: '🤝', t: 'Ipsum', d: 'Sed do eiusmod tempor incididunt ut labore et dolore magna.' },
+    { icon: '🏅', t: 'Dolor', d: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco.' },
   ]
 
   return (
@@ -40,20 +40,20 @@ export default function PublicHome({
         <div className="relative mx-auto max-w-6xl px-5 py-28 sm:py-36">
           <div className="mb-6 flex items-center gap-3">
             <span className="rule-bronze" />
-            <p className="text-[11px] font-semibold uppercase tracking-brand text-gold-400">One ID, One City, One Network</p>
+            <p className="text-[11px] font-semibold uppercase tracking-brand text-gold-400">Lorem ipsum dolor</p>
           </div>
           <h1 className="font-serif text-[2.6rem] font-semibold leading-[1.18] tracking-tight sm:text-[4.2rem]">
             街が、競争力になる。
           </h1>
           <p className="mt-7 max-w-xl text-base leading-8 text-stone-300 sm:text-lg">
-            オフィスを選ぶことは、戦略を選ぶことだ。
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           </p>
           <div className="mt-10 flex flex-wrap gap-3">
             <Button variant="gold" onClick={onContact}>
-              移転・オフィスの相談（無料）
+              Lorem ipsum dolor
             </Button>
             <Button variant="outline" onClick={() => onNav('archive')}>
-              <span className="text-white">サービス資料を見る</span>
+              <span className="text-white">Lorem ipsum</span>
             </Button>
           </div>
         </div>
@@ -78,7 +78,7 @@ export default function PublicHome({
       </Section>
 
       {/* 3. 3つの提供価値 */}
-      <Section eyebrow="Why HILLS ONE" title="森ビルだけの、3つの価値" className="border-y border-stone-200/70 bg-white">
+      <Section eyebrow="Lorem ipsum" title="Lorem ipsum dolor sit amet" className="border-y border-stone-200/70 bg-white">
         <div className="grid gap-6 sm:grid-cols-3">
           {values.map((v) => (
             <Card key={v.t}>
@@ -91,7 +91,7 @@ export default function PublicHome({
       </Section>
 
       {/* 4. 物件・拠点ショーケース */}
-      <Section eyebrow="Office" title="拠点・区画を探す" desc="主要なヒルズから、面積・特徴で検討を始められます。">
+      <Section eyebrow="Ipsum" title="Lorem ipsum dolor sit" desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do.">
         <div className="grid gap-6 sm:grid-cols-3">
           {properties.map((p) => (
             <Card key={p.name} className="flex flex-col !p-0">
@@ -105,7 +105,7 @@ export default function PublicHome({
                 <p className="mt-1 text-sm text-stone-500">{p.area}</p>
                 <p className="mt-2 flex-1 text-sm leading-7 text-stone-600">{p.feature}</p>
                 <button onClick={onContact} className="mt-4 text-sm font-semibold text-gold-600 hover:underline">
-                  この区画の内見を予約 →
+                  Lorem ipsum →
                 </button>
               </div>
             </Card>
@@ -114,7 +114,7 @@ export default function PublicHome({
       </Section>
 
       {/* 5. 導入事例 */}
-      <Section eyebrow="Customer Story" title="入居企業の成果" className="border-y border-stone-200/70 bg-white">
+      <Section eyebrow="Dolor sit" title="Lorem ipsum dolor" className="border-y border-stone-200/70 bg-white">
         <div className="grid gap-6 sm:grid-cols-3">
           {cases.map((c) => (
             <Card key={c.company}>
@@ -128,21 +128,21 @@ export default function PublicHome({
       </Section>
 
       {/* 6. ビジネスマッチング ティーザー */}
-      <Section eyebrow="Business Matching" title="ここでしか、繋がれない企業がいる">
+      <Section eyebrow="Amet elit" title="Lorem ipsum dolor sit amet consectetur">
         <div className="overflow-hidden rounded-lg bg-ink-900 text-white shadow-card">
           <div className="grid items-center gap-6 p-8 sm:grid-cols-2 sm:p-10">
             <div>
-              <h3 className="font-serif text-2xl font-semibold">虎ノ門サミット アーカイブ</h3>
+              <h3 className="font-serif text-2xl font-semibold">Lorem ipsum dolor sit</h3>
               <p className="mt-4 text-sm leading-7 text-stone-300">
-                入居企業1,200社のネットワーク。登壇動画・資料・参加企業録を蓄積。続きは会員登録 / お問い合わせから。
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
               </p>
               <div className="mt-5 max-w-xs">
                 <ProgressBar value={30} />
-                <p className="mt-2 text-xs text-stone-400">プレビュー視聴 30%</p>
+                <p className="mt-2 text-xs text-stone-400">Lorem ipsum 00%</p>
               </div>
               <div className="mt-6">
                 <Button variant="gold" onClick={onContact}>
-                  続きを見る（問い合わせ）
+                  Lorem ipsum dolor
                 </Button>
               </div>
             </div>
@@ -165,12 +165,12 @@ export default function PublicHome({
       </div>
 
       {/* 8. ミッドCTA + 導入の流れ */}
-      <Section title="導入はかんたん3ステップ">
+      <Section title="Lorem ipsum dolor sit amet">
         <div className="grid gap-6 sm:grid-cols-3">
           {[
-            { n: '01', t: '相談・資料請求', d: 'オンラインで現状の課題をヒアリング。' },
-            { n: '02', t: 'プラン設計・内見', d: '区画とサービスを最適に組み合わせ。' },
-            { n: '03', t: '統合ID発行・運用', d: 'HILLS IDで全アセットの利用を開始。' },
+            { n: '01', t: 'Lorem ipsum', d: 'Lorem ipsum dolor sit amet, consectetur.' },
+            { n: '02', t: 'Dolor sit amet', d: 'Sed do eiusmod tempor incididunt ut labore.' },
+            { n: '03', t: 'Consectetur elit', d: 'Ut enim ad minim veniam quis nostrud.' },
           ].map((s) => (
             <Card key={s.n}>
               <span className="font-serif text-3xl font-semibold text-gold-500">{s.n}</span>
@@ -185,14 +185,14 @@ export default function PublicHome({
       <div className="relative overflow-hidden bg-gradient-to-br from-ink-800 to-ink-700 text-white">
         <div className="absolute -left-20 -top-16 h-72 w-72 rounded-full bg-gold-500/10 blur-3xl" />
         <div className="relative mx-auto max-w-6xl px-5 py-20 text-center">
-          <h2 className="font-serif text-3xl font-semibold sm:text-4xl">まずは、情報収集から。</h2>
-          <p className="mt-4 text-stone-300">移転・サービス導入のご相談はこちら。30分・無料・営業電話はしません。</p>
+          <h2 className="font-serif text-3xl font-semibold sm:text-4xl">Lorem ipsum dolor sit.</h2>
+          <p className="mt-4 text-stone-300">Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod.</p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Button variant="gold" onClick={onContact}>
-              オンラインで相談する
+              Lorem ipsum
             </Button>
             <Button variant="outline" onClick={onContact}>
-              <span className="text-white">3分でわかる資料（無料DL）</span>
+              <span className="text-white">Dolor sit amet</span>
             </Button>
           </div>
         </div>
