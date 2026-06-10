@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { ButtonLink, Eyebrow, SectionHeading, Tag, Visual } from '@/components/ui'
-import { properties, consultSteps, leasingStats } from '@/lib/data'
+import { properties, consultSteps, leasingStats, officeTypes } from '@/lib/data'
 
 export const metadata: Metadata = {
   title: '入居をご検討の方 — HILLS OFFICE（社内検討用モックアップ）',
@@ -17,7 +17,7 @@ export default function LeasingPage() {
             最適な区画と働き方を、ひとつの窓口で。
           </h1>
           <p className="mt-5 max-w-xl text-[15px] leading-8 text-ink-600">
-            物件ポートフォリオの比較から、ワークプレイスの設計、内覧まで。移転の意思決定を、専任担当が伴走します。
+            グローバル企業のニーズに応えるスペック、優れた制振性能と最新のセキュリティ。物件の比較からワークプレイスの設計、内覧まで、移転の意思決定を専任担当が伴走します。外資系企業の本国意向にも配慮した柔軟な対応が可能です。
           </p>
         </div>
       </section>
@@ -72,6 +72,28 @@ export default function LeasingPage() {
               <p className="mt-2 text-sm text-white/60">{s.label}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* 多様なオフィスの選択肢 */}
+      <section className="border-b border-line bg-paper">
+        <div className="container-x py-20 sm:py-24">
+          <SectionHeading
+            eyebrow="Office Types"
+            title="多様なオフィスの選択肢"
+            lead="一般的なオフィスにとどまらず、業態・業容、そしてワーカーのワークスタイルに合わせたオフィススペースをご用意しています。"
+          />
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
+            {officeTypes.map((o, i) => (
+              <div key={o.t} className="rounded-2xl border border-line p-8">
+                <span className="font-serif text-2xl font-semibold text-ink-400" style={{ color: '#9a978f' }}>
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <h3 className="mt-5 font-serif text-lg font-semibold text-ink-950">{o.t}</h3>
+                <p className="mt-3 text-sm leading-7 text-ink-600">{o.d}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

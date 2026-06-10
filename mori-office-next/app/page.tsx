@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { ButtonLink, Eyebrow, SectionHeading } from '@/components/ui'
-import { phases } from '@/lib/data'
+import { phases, corpStats, streetPillars } from '@/lib/data'
 
 export default function HomePage() {
   return (
@@ -24,15 +24,17 @@ export default function HomePage() {
         />
         <div className="container-x relative py-28 sm:py-36 lg:py-44">
           <div className="animate-rise">
-            <Eyebrow light>Office Tenant Service</Eyebrow>
+            <Eyebrow light>Work Life, beyond the Office</Eyebrow>
           </div>
           <h1 className="mt-7 max-w-4xl animate-rise font-serif text-[2.4rem] font-semibold leading-[1.16] tracking-tight sm:text-[3.6rem] lg:text-[4.4rem]">
-            入居前から、更新まで。
+            オフィスにとどまらない、
+            <br className="hidden sm:block" />
+            ワークライフを。
           </h1>
           <p className="mt-7 max-w-xl animate-rise text-base leading-8 text-white/70 sm:text-lg">
-            オフィスをめぐるすべての時間を、ひとつの窓口で。
+            立地も、スペックも、そして街全体が。
             <br className="hidden sm:block" />
-            森ビルのオフィステナント向け統合サービス。
+            企業とワーカーの「働く」を支え、企業価値の向上と持続的成長に寄与します。
           </p>
           <div className="mt-10 flex flex-wrap gap-3">
             <ButtonLink href="/contact" variant="solid-light">
@@ -45,16 +47,62 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* コンセプト：企業の課題を、街が支える */}
+      <section className="bg-paper">
+        <div className="container-x grid gap-12 py-20 sm:py-28 lg:grid-cols-[1fr_0.9fr] lg:items-end">
+          <SectionHeading
+            eyebrow="Concept"
+            title={
+              <>
+                企業の課題を、
+                <br />
+                街が支える。
+              </>
+            }
+            lead="恒常的な利益に加え、SDGsへの配慮、人材のための健康と快適性、そして「集まり協働する価値」の再認識。これまで企業が個別に向き合ってきた課題に、街全体で応えられる部分があると私たちは考えます。"
+          />
+          <div className="grid grid-cols-2 gap-x-8 gap-y-10 lg:pb-2">
+            {corpStats.map((s) => (
+              <div key={s.label} className="border-t border-line pt-4">
+                <p className="font-serif text-3xl font-semibold text-ink-950 sm:text-4xl">{s.value}</p>
+                <p className="mt-2 text-sm leading-6 text-ink-600">{s.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 街ができること */}
+      <section className="bg-ink-950 text-white">
+        <div className="container-x py-20 sm:py-28">
+          <SectionHeading
+            eyebrow="What the City Offers"
+            title="街ができること"
+            lead="オフィスフロアの提供にとどまらず、街全体をひとつのキャンパスオフィスとして。企業とワーカーの働き方を、4つの側面から支えます。"
+            light
+          />
+          <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-2 lg:grid-cols-4">
+            {streetPillars.map((p) => (
+              <div key={p.t} className="bg-ink-950 p-8">
+                <span className="font-serif text-2xl text-white/80">{p.icon}</span>
+                <h3 className="mt-6 font-serif text-lg font-semibold">{p.t}</h3>
+                <p className="mt-3 text-sm leading-7 text-white/60">{p.d}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* サービス全体マップ（入居前 → 入居中 → 更新時） */}
       <section className="bg-paper">
         <div className="container-x py-20 sm:py-28">
           <SectionHeading
             eyebrow="Service Map"
             title="サービス全体マップ"
-            lead="オフィスとの関係は、契約して終わりではありません。入居前・入居中・更新時の3つのフェーズで、ご提供するサービスの全体像をご覧いただけます。"
+            lead="検討から、入居後の運用、契約更新まで。ご提供するサービスの全体像を3つのフェーズでご覧いただけます。"
           />
 
-          {/* 旅程インジケータ（入居前 — 入居中 — 更新時） */}
+          {/* 旅程インジケータ */}
           <div className="mt-14 hidden grid-cols-3 lg:grid">
             {phases.map((p, i) => (
               <div key={p.key} className="flex items-center gap-3">
@@ -65,7 +113,6 @@ export default function HomePage() {
             ))}
           </div>
 
-          {/* 3フェーズのサービス一覧 */}
           <div className="mt-6 grid gap-6 lg:grid-cols-3">
             {phases.map((p) => (
               <div key={p.key} className="flex flex-col rounded-2xl border border-line bg-paper p-8">
@@ -86,7 +133,7 @@ export default function HomePage() {
                         className="flex items-center justify-between gap-3 bg-mist/40 px-4 py-3 text-sm text-ink-800 transition-colors hover:bg-mist"
                       >
                         <span>{it}</span>
-                        <span className="text-ink-400" style={{ color: '#9a978f' }} aria-hidden>
+                        <span style={{ color: '#9a978f' }} aria-hidden>
                           ↗
                         </span>
                       </Link>
@@ -94,10 +141,7 @@ export default function HomePage() {
                   ))}
                 </ul>
 
-                <Link
-                  href={p.href}
-                  className="group mt-6 inline-flex items-center gap-2 text-sm font-semibold text-ink-950"
-                >
+                <Link href={p.href} className="group mt-6 inline-flex items-center gap-2 text-sm font-semibold text-ink-950">
                   {p.phase}のサービスへ
                   <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
                 </Link>
@@ -110,10 +154,7 @@ export default function HomePage() {
       {/* クロージングCTA */}
       <section className="border-t border-line bg-mist">
         <div className="container-x flex flex-col items-start gap-8 py-20 sm:flex-row sm:items-center sm:justify-between sm:py-24">
-          <SectionHeading
-            title="まずは、ご相談から。"
-            lead="移転のご検討も、ご入居中のご相談も。専任の担当がうかがいます。"
-          />
+          <SectionHeading title="まずは、ご相談から。" lead="移転のご検討も、ご入居中のご相談も。専任の担当がうかがいます。" />
           <div className="flex shrink-0 flex-wrap gap-3">
             <ButtonLink href="/contact" variant="solid">
               お問い合わせ
