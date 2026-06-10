@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { ButtonLink, Eyebrow, SectionHeading, Tag } from '@/components/ui'
-import { workersBoard, events, supports, applications, tenantKpis } from '@/lib/data'
+import { workersBoard, events, supports, applications, tenantKpis, rooftopForm } from '@/lib/data'
 
 export const metadata: Metadata = {
   title: 'ご入居中の方 — HILLS OFFICE（社内検討用モックアップ）',
@@ -117,6 +117,97 @@ export default function TenantsPage() {
               </button>
             ))}
           </div>
+          {/* 申請の一例：ルーフガーデン貸切予約（新虎通りCORE） */}
+          <div className="mt-8 overflow-hidden rounded-2xl border border-line">
+            <div className="flex flex-col gap-1 border-b border-line bg-mist/50 px-7 py-5 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <p className="text-[11px] font-semibold uppercase tracking-brand text-ink-500">申請の一例</p>
+                <h3 className="mt-1 font-serif text-lg font-semibold text-ink-950">{rooftopForm.title}</h3>
+              </div>
+              <span className="text-xs text-ink-500">{rooftopForm.place}</span>
+            </div>
+
+            <div className="grid gap-px bg-line sm:grid-cols-2">
+              {/* プラン選択 */}
+              <div className="bg-paper p-7">
+                <p className="text-sm font-semibold text-ink-900">ご利用プラン</p>
+                <div className="mt-4 space-y-2">
+                  {rooftopForm.plans.map((p, i) => (
+                    <label
+                      key={p.t}
+                      className={`flex cursor-default items-center justify-between rounded-xl border px-4 py-3 ${
+                        i === 0 ? 'border-ink-950 bg-ink-950/[0.03]' : 'border-line'
+                      }`}
+                    >
+                      <span className="flex items-center gap-3 text-sm text-ink-900">
+                        <span
+                          className={`grid h-4 w-4 place-items-center rounded-full border ${
+                            i === 0 ? 'border-ink-950' : 'border-ink-400'
+                          }`}
+                          style={i !== 0 ? { borderColor: '#9a978f' } : undefined}
+                        >
+                          {i === 0 && <span className="h-2 w-2 rounded-full bg-ink-950" />}
+                        </span>
+                        {p.t}
+                      </span>
+                      <span className="text-sm font-semibold text-ink-900">{p.price}</span>
+                    </label>
+                  ))}
+                </div>
+
+                <p className="mt-6 text-sm font-semibold text-ink-900">ご利用可能時間</p>
+                <ul className="mt-3 space-y-1.5 text-sm text-ink-600">
+                  {rooftopForm.hours.map((h) => (
+                    <li key={h} className="flex items-center gap-2">
+                      <span className="h-1 w-1 rounded-full" style={{ background: '#9a978f' }} />
+                      {h}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* 詳細入力 */}
+              <div className="bg-paper p-7">
+                <div className="grid grid-cols-2 gap-4">
+                  {['利用日', '利用人数'].map((l) => (
+                    <div key={l}>
+                      <label className="mb-2 block text-xs font-semibold text-ink-700">{l}</label>
+                      <div className="h-10 rounded-lg border border-line bg-mist/40" />
+                    </div>
+                  ))}
+                </div>
+
+                <p className="mt-6 text-sm font-semibold text-ink-900">貸出し備品</p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {rooftopForm.equipment.map((e) => (
+                    <Tag key={e}>{e}</Tag>
+                  ))}
+                </div>
+
+                <p className="mt-6 text-sm font-semibold text-ink-900">お支払い方法</p>
+                <div className="mt-3 flex gap-2">
+                  {rooftopForm.pay.map((p, i) => (
+                    <span
+                      key={p}
+                      className={`rounded-full border px-4 py-1.5 text-sm ${
+                        i === 0 ? 'border-ink-950 bg-ink-950 text-white' : 'border-line text-ink-600'
+                      }`}
+                    >
+                      {p}
+                    </span>
+                  ))}
+                </div>
+
+                <button
+                  type="button"
+                  className="mt-7 w-full rounded-full bg-ink-950 py-3 text-sm font-semibold text-white transition-colors hover:bg-ink-700"
+                >
+                  この内容で申請する
+                </button>
+              </div>
+            </div>
+          </div>
+
           <div className="mt-12 flex flex-wrap gap-3">
             <ButtonLink href="/contact" variant="solid">
               担当に相談する
