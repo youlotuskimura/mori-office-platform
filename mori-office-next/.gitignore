@@ -23,3 +23,9 @@ next-env.d.ts
 
 # env
 .env*.local
+
+# 社内版（限定公開）でのみ使用する資料写真。公開リポジトリには含めない。
+/public/lab/*.jpg
+/public/lab/*.jpeg
+/public/lab/*.png
+/public/lab/*.webp

@@ -7,17 +7,28 @@ export const metadata: Metadata = {
 }
 
 export default function InsightsPage() {
+  // 社内（限定公開）版でのみ資料写真を表示。公開版はプレースホルダのまま。
+  const usePhotos = process.env.NEXT_PUBLIC_LAB_PHOTOS === '1'
+
   return (
     <>
       {/* ヒーロー：MORIワークスタイルラボ */}
       <section className="relative overflow-hidden bg-ink-950 text-white">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              'radial-gradient(120% 100% at 15% 0%, rgba(255,255,255,0.1), rgba(255,255,255,0) 50%), linear-gradient(160deg, #1b1a18 0%, #0a0a0a 70%)',
-          }}
-        />
+        {usePhotos ? (
+          <>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/lab/lab-community.jpg" alt="" className="absolute inset-0 h-full w-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-r from-ink-950/90 via-ink-950/75 to-ink-950/55" />
+          </>
+        ) : (
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage:
+                'radial-gradient(120% 100% at 15% 0%, rgba(255,255,255,0.1), rgba(255,255,255,0) 50%), linear-gradient(160deg, #1b1a18 0%, #0a0a0a 70%)',
+            }}
+          />
+        )}
         <div className="container-x relative py-20 sm:py-28">
           <Eyebrow light>MORI Workstyle Lab</Eyebrow>
           <h1 className="mt-6 max-w-3xl font-serif text-[2rem] font-semibold leading-tight tracking-tight sm:text-[3rem]">
@@ -108,6 +119,21 @@ export default function InsightsPage() {
           </div>
         </div>
       </section>
+
+      {/* 活動の様子（社内版のみ：資料写真） */}
+      {usePhotos && (
+        <section className="border-t border-line bg-mist">
+          <div className="container-x py-20 sm:py-24">
+            <SectionHeading eyebrow="Gallery" title="活動の様子" lead="第1期プログラムの様子（社内資料より）。" />
+            <div className="mt-12 grid gap-4 sm:grid-cols-3">
+              {['lab-01.jpg', 'lab-02.jpg', 'lab-03.jpg'].map((f) => (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img key={f} src={`/lab/${f}`} alt="" className="aspect-[4/3] w-full rounded-2xl object-cover" />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* 関連コラム */}
       <section className="border-t border-line bg-paper">
