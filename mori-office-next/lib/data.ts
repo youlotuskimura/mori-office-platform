@@ -72,33 +72,57 @@ export const officeTypes = [
 
 export const properties = [
   {
-    name: '虎ノ門ステーションタワー',
-    area: '120 – 4,800 坪',
-    floor: '40F – 65F',
+    name: '虎ノ門ヒルズ ステーションタワー',
+    area: 'お問い合わせ',
+    floor: '—',
     rent: '応相談',
-    vacancy: '一部区画 空室あり',
+    vacancy: 'お問い合わせ',
     tag: 'FLAGSHIP',
-    feature: '駅直結の国際新都心。基準階約1,300坪のメガプレート。',
+    feature: '駅直結の国際新都心。最上部に約10,000m²の情報発信拠点「TOKYO NODE」を擁するフラッグシップ。',
+    img: '/brochure/tokyo-node.jpg',
   },
   {
-    name: '麻布台ガーデンタワー',
-    area: '300 – 6,200 坪',
-    floor: '25F – 58F',
+    name: '麻布台ヒルズ 森JPタワー',
+    area: 'お問い合わせ',
+    floor: '—',
     rent: '応相談',
     vacancy: 'お問い合わせ',
     tag: 'PREMIUM',
-    feature: '緑とウェルネスを軸にした最上級グレード。眺望・環境性能に優れる。',
+    feature: 'タワー33・34Fに約1,300坪の街区ラウンジ「Hills House」。街全体をワークプレイスにする拠点。',
+    img: '/brochure/hills-house.jpg',
   },
   {
-    name: '六本木セントラルタワー',
-    area: '150 – 3,500 坪',
-    floor: '12F – 48F',
-    rent: '応相談',
-    vacancy: '少数区画',
-    tag: '',
-    feature: '文化施設を内包する複合都心。人材を惹きつける立地。',
+    name: '六本木五丁目プロジェクト',
+    area: '敷地 約7.9ha',
+    floor: '—',
+    rent: '—',
+    vacancy: '計画中',
+    tag: 'PROJECT',
+    feature: '延床約106万m²・オフィス貸室約34万m²。六本木ヒルズを超えるスケールの大規模複合プロジェクト。',
+    img: '/brochure/roppongi5.jpg',
   },
 ]
+
+// 六本木五丁目プロジェクト（六本木五丁目西地区）スケール
+export const roppongiStats = [
+  { value: '約7.9ha', label: '敷地面積' },
+  { value: '約106万m²', label: '延床面積（約321,500坪）' },
+  { value: '約34万m²', label: 'オフィス貸室面積（約103,300坪）' },
+  { value: '約820戸', label: '住戸数' },
+]
+
+// 麻布台ヒルズ S-Office（セットアップオフィス）
+export const sOffice = {
+  name: '麻布台ヒルズ S-Office',
+  desc: '内装・什器を備え、早期の入居を可能にするセットアップオフィス。ヒルズの環境とBCP性能を、スモールスタートでも。',
+  img: '/brochure/s-office.jpg',
+  points: [
+    { k: '規模', v: '約4,500m²（約1,360坪）/ B棟 3-5F' },
+    { k: '区画', v: '1区画 9〜32坪 × 68区画' },
+    { k: '拡張', v: '約100坪クラスの区画もご用意' },
+    { k: '設え', v: '内装・什器付き / BCP対応' },
+  ],
+}
 
 export const consultSteps = [
   { no: '01', t: '現状ヒアリング', d: '事業計画・人員計画・働き方の課題を整理します。' },

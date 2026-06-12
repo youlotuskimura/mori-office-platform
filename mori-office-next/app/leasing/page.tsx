@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
-import { ButtonLink, Eyebrow, SectionHeading, Tag, Visual } from '@/components/ui'
-import { properties, consultSteps, leasingStats, officeTypes } from '@/lib/data'
+import { ButtonLink, Eyebrow, SectionHeading, Tag } from '@/components/ui'
+import { properties, consultSteps, leasingStats, officeTypes, sOffice } from '@/lib/data'
+import { asset } from '@/lib/asset'
 
 export const metadata: Metadata = {
   title: '入居をご検討の方 — HILLS OFFICE（社内検討用モックアップ）',
@@ -28,12 +29,13 @@ export default function LeasingPage() {
           <SectionHeading
             eyebrow="Portfolio"
             title="物件ポートフォリオ概要"
-            lead="主要エリアのオフィス区画を、面積・基準階・特徴で比較いただけます。（掲載情報はすべて架空のサンプルです）"
+            lead="主要なヒルズと、進行中の大規模プロジェクト。（社内検討用デモにつき、掲載情報は簡略化しています）"
           />
           <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {properties.map((p) => (
               <article key={p.name} className="flex flex-col overflow-hidden rounded-2xl border border-line bg-paper">
-                <Visual className="aspect-[16/10] w-full" label="Image placeholder" />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={asset(p.img)} alt={p.name} className="aspect-[16/10] w-full object-cover" />
                 <div className="flex flex-1 flex-col p-7">
                   <div className="flex items-center gap-2">
                     {p.tag && <Tag>{p.tag}</Tag>}
@@ -94,6 +96,28 @@ export default function LeasingPage() {
               </div>
             ))}
           </div>
+
+          {/* セットアップオフィスの実例：麻布台ヒルズ S-Office */}
+          <div className="mt-8 grid items-stretch gap-px overflow-hidden rounded-2xl border border-line bg-line lg:grid-cols-[1fr_1.1fr]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={asset(sOffice.img)} alt={sOffice.name} className="h-full min-h-[240px] w-full object-cover" />
+            <div className="bg-paper p-8 sm:p-10">
+              <p className="text-[11px] font-semibold uppercase tracking-brand text-ink-500">Setup Office</p>
+              <h3 className="mt-2 font-serif text-2xl font-semibold text-ink-950">{sOffice.name}</h3>
+              <p className="mt-4 text-sm leading-7 text-ink-600">{sOffice.desc}</p>
+              <dl className="mt-7 space-y-3 border-t border-line pt-6">
+                {sOffice.points.map((pt) => (
+                  <div key={pt.k} className="flex gap-5 text-sm">
+                    <dt className="w-12 shrink-0 font-semibold text-ink-500">{pt.k}</dt>
+                    <dd className="text-ink-900">{pt.v}</dd>
+                  </div>
+                ))}
+              </dl>
+              <ButtonLink href="/contact" variant="outline" className="mt-8">
+                S-Office の空き区画を問い合わせる
+              </ButtonLink>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -120,7 +144,18 @@ export default function LeasingPage() {
               ))}
             </ol>
           </div>
-          <Visual className="aspect-[4/5] w-full rounded-2xl lg:aspect-[3/4]" label="Workplace design" />
+          <figure className="relative overflow-hidden rounded-2xl">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={asset('/brochure/arch.jpg')}
+              alt="ARCH Toranomon Hills"
+              className="aspect-[4/5] w-full object-cover lg:aspect-[3/4]"
+            />
+            <figcaption className="absolute bottom-4 left-5 text-[11px] font-medium uppercase tracking-[0.2em] text-white/80">
+              ARCH Toranomon Hills
+            </figcaption>
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-ink-950/55 to-transparent" />
+          </figure>
         </div>
       </section>
 

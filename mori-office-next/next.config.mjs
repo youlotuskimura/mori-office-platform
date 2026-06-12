@@ -6,12 +6,17 @@
 //  - 何も指定なし            … Vercel など通常デプロイ（ルート配信）
 const isGhPages = process.env.DEPLOY_TARGET === 'gh-pages'
 const isStaticExport = isGhPages || process.env.STATIC_EXPORT === '1'
+const basePath = isGhPages ? '/mori-office-platform/next' : ''
 
 const nextConfig = {
   reactStrictMode: true,
   images: { unoptimized: true },
   ...(isStaticExport ? { output: 'export', trailingSlash: true } : {}),
-  ...(isGhPages ? { basePath: '/mori-office-platform/next' } : {}),
+  ...(isGhPages ? { basePath } : {}),
+  env: {
+    // <img src> など手書きパスにも basePath を効かせるための公開値
+    NEXT_PUBLIC_BASE_PATH: basePath,
+  },
 }
 
 export default nextConfig

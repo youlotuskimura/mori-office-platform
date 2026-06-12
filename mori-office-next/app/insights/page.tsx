@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Eyebrow, SectionHeading, Tag, Visual } from '@/components/ui'
 import { articles, labOverview, labStats, labKeywords, labProgram, labActivities, labVoices } from '@/lib/data'
+import { asset } from '@/lib/asset'
 
 export const metadata: Metadata = {
   title: 'ワークスタイル知見 — HILLS OFFICE（社内検討用モックアップ）',
@@ -17,7 +18,7 @@ export default function InsightsPage() {
         {usePhotos ? (
           <>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/lab/lab-community.jpg" alt="" className="absolute inset-0 h-full w-full object-cover" />
+            <img src={asset('/lab/lab-community.jpg')} alt="" className="absolute inset-0 h-full w-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-r from-ink-950/90 via-ink-950/75 to-ink-950/55" />
           </>
         ) : (
@@ -128,7 +129,7 @@ export default function InsightsPage() {
             <div className="mt-12 grid gap-4 sm:grid-cols-3">
               {['lab-01.jpg', 'lab-02.jpg', 'lab-03.jpg'].map((f) => (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img key={f} src={`/lab/${f}`} alt="" className="aspect-[4/3] w-full rounded-2xl object-cover" />
+                <img key={f} src={asset(`/lab/${f}`)} alt="" className="aspect-[4/3] w-full rounded-2xl object-cover" />
               ))}
             </div>
           </div>

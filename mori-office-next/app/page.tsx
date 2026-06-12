@@ -1,27 +1,21 @@
 import Link from 'next/link'
 import { ButtonLink, Eyebrow, SectionHeading } from '@/components/ui'
-import { phases, corpStats, streetPillars } from '@/lib/data'
+import { phases, corpStats, streetPillars, roppongiStats } from '@/lib/data'
+import { asset } from '@/lib/asset'
 
 export default function HomePage() {
   return (
     <>
       {/* ヒーロー */}
       <section className="relative overflow-hidden bg-ink-950 text-white">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              'radial-gradient(120% 100% at 80% 0%, rgba(255,255,255,0.12), rgba(255,255,255,0) 50%), linear-gradient(160deg, #1c1b19 0%, #0a0a0a 70%)',
-          }}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={asset('/brochure/roppongi5.jpg')}
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover object-[center_30%]"
         />
-        <div
-          className="absolute inset-0 opacity-[0.05]"
-          style={{
-            backgroundImage:
-              'linear-gradient(rgba(255,255,255,0.7) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.7) 1px, transparent 1px)',
-            backgroundSize: '72px 72px',
-          }}
-        />
+        <div className="absolute inset-0 bg-gradient-to-r from-ink-950/85 via-ink-950/60 to-ink-950/30" />
+        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-ink-950/80 to-transparent" />
         <div className="container-x relative py-28 sm:py-36 lg:py-44">
           <div className="animate-rise">
             <Eyebrow light>Work Life, beyond the Office</Eyebrow>
@@ -45,6 +39,9 @@ export default function HomePage() {
             </ButtonLink>
           </div>
         </div>
+        <p className="absolute bottom-4 right-5 text-[10px] tracking-wide text-white/45">
+          六本木五丁目プロジェクト 完成イメージ（計画中につき変更の場合があります）
+        </p>
       </section>
 
       {/* コンセプト：企業の課題を、街が支える */}
@@ -68,6 +65,38 @@ export default function HomePage() {
                 <p className="mt-2 text-sm leading-6 text-ink-600">{s.label}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 次のプロジェクト：六本木五丁目 */}
+      <section className="border-t border-line bg-mist">
+        <div className="container-x grid gap-12 py-20 sm:py-28 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+          <div className="overflow-hidden rounded-2xl">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={asset('/brochure/roppongi5-aerial.jpg')} alt="六本木五丁目プロジェクト 計画区域" className="aspect-[16/10] w-full object-cover" />
+          </div>
+          <div>
+            <SectionHeading
+              eyebrow="Next Project"
+              title={
+                <>
+                  都市は、
+                  <br />
+                  まだ進化する。
+                </>
+              }
+              lead="六本木五丁目プロジェクト（六本木五丁目西地区）。六本木ヒルズを超えるスケールで、文化・交流・BCP・環境のすべてを束ねる次の都心が動き出しています。いま選ぶ場所が、これからも古びない理由です。"
+            />
+            <dl className="mt-10 grid grid-cols-2 gap-x-8 gap-y-7">
+              {roppongiStats.map((s) => (
+                <div key={s.label} className="border-t border-line pt-3">
+                  <dd className="font-serif text-2xl font-semibold text-ink-950 sm:text-3xl">{s.value}</dd>
+                  <dt className="mt-1 text-xs leading-5 text-ink-600">{s.label}</dt>
+                </div>
+              ))}
+            </dl>
+            <p className="mt-6 text-[10px] text-ink-500">※ 計画中につき、数値・内容は変更となる場合があります。</p>
           </div>
         </div>
       </section>
