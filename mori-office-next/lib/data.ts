@@ -271,6 +271,7 @@ export const articles = [
     excerpt:
       '出社率が平均60%台で安定するいま、オフィスに求められる役割は「席を置く場所」から「人と文化が交わる装置」へと移りつつある。先進企業10社の再設計事例から、本社機能の再定義を読み解く。',
     author: '森オフィス総研 編集部',
+    img: '/brochure/s-office-lounge.jpg',
   },
   {
     slug: 'bcp-as-strategy',
@@ -281,6 +282,7 @@ export const articles = [
     excerpt:
       '自家発電や制振構造といった建物の備えは、もはや総務だけの関心事ではない。災害時に事業を止めないという一点が、採用・与信・株主対応にまで波及する。レジリエンスを経営の言葉に翻訳する。',
     author: '田村 拓也',
+    img: '/brochure/shanghai.jpg',
   },
   {
     slug: 'talent-and-place',
@@ -291,5 +293,6 @@ export const articles = [
     excerpt:
       '中途採用の意思決定において、勤務地が与える影響は想像以上に大きい。応募数・内定承諾率・定着率の3指標から、オフィスの立地が採用ファネルに及ぼす効果を定量的に検証した。',
     author: '小林 さやか',
+    img: '/brochure/s-office-meeting.jpg',
   },
 ]

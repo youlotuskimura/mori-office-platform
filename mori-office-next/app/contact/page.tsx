@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Eyebrow } from '@/components/ui'
+import { asset } from '@/lib/asset'
 
 export const metadata: Metadata = {
   title: 'お問い合わせ — HILLS OFFICE（社内検討用モックアップ）',
@@ -42,6 +43,10 @@ export default function ContactPage() {
               <dd className="mt-2 text-sm text-ink-800">2営業日以内に担当よりご連絡します。</dd>
             </div>
           </dl>
+          <div className="mt-10 overflow-hidden rounded-2xl">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={asset('/brochure/s-office-lounge.jpg')} alt="" className="aspect-[16/10] w-full object-cover" />
+          </div>
         </div>
 
         {/* 右：フォームUI（見た目のみ・送信機能なし） */}

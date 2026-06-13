@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { ButtonLink, Eyebrow, SectionHeading, Tag } from '@/components/ui'
 import { workersBoard, events, supports, applications, tenantKpis, rooftopForm } from '@/lib/data'
+import { asset } from '@/lib/asset'
 
 export const metadata: Metadata = {
   title: 'ご入居中の方 — HILLS OFFICE（社内検討用モックアップ）',
@@ -10,8 +11,11 @@ export default function TenantsPage() {
   return (
     <>
       {/* ページイントロ */}
-      <section className="border-b border-line bg-ink-950 text-white">
-        <div className="container-x py-16 sm:py-20">
+      <section className="relative overflow-hidden border-b border-line bg-ink-950 text-white">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={asset('/brochure/tokyo-node-dining.jpg')} alt="" className="absolute inset-0 h-full w-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-r from-ink-950/92 via-ink-950/80 to-ink-950/55" />
+        <div className="container-x relative py-16 sm:py-20">
           <Eyebrow light>For Current Tenants</Eyebrow>
           <h1 className="mt-6 max-w-3xl font-serif text-[2rem] font-semibold leading-tight tracking-tight sm:text-[2.8rem]">
             日々の運用を、ひとつの窓口に。

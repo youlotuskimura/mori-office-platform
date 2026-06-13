@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Eyebrow, SectionHeading, Tag, Visual } from '@/components/ui'
+import { Eyebrow, SectionHeading, Tag } from '@/components/ui'
 import { articles, labOverview, labStats, labKeywords, labProgram, labActivities, labVoices } from '@/lib/data'
 import { asset } from '@/lib/asset'
 
@@ -143,7 +143,8 @@ export default function InsightsPage() {
           <div className="mt-12 grid gap-8 lg:grid-cols-3">
             {articles.map((a) => (
               <article key={a.slug} className="group flex flex-col">
-                <Visual className="aspect-[16/10] w-full rounded-2xl" label={a.cat} />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={asset(a.img)} alt="" className="aspect-[16/10] w-full rounded-2xl object-cover" />
                 <div className="mt-6 flex items-center gap-3">
                   <Tag>{a.cat}</Tag>
                   <span className="text-xs text-ink-500">
