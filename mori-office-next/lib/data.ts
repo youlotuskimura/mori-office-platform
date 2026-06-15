@@ -51,10 +51,10 @@ export const phases = [
 
 // コーポレートのオフィス事業エッセンスを反映した要素群
 export const corpStats = [
-  { value: '約120棟', label: '港区中心のオフィスビル' },
-  { value: '128万㎡', label: 'オフィス総面積' },
-  { value: '港区中心', label: '事業の主要エリア' },
-  { value: '多数', label: '外資系企業のご入居' },
+  { value: '約120棟', label: '都市型オフィスビル事業実績' },
+  { value: '128万㎡', label: 'ヒルズシリーズ オフィス総面積' },
+  { value: '50カ国超', label: 'ご入居企業の国・地域' },
+  { value: '200社超', label: '外資系・グローバル企業のご入居' },
 ]
 
 export const streetPillars = [
@@ -74,7 +74,7 @@ export const properties = [
   {
     name: '虎ノ門ヒルズ ステーションタワー',
     area: 'お問い合わせ',
-    floor: '—',
+    floor: 'B3–49F',
     rent: '応相談',
     vacancy: 'お問い合わせ',
     tag: 'FLAGSHIP',
@@ -84,7 +84,7 @@ export const properties = [
   {
     name: '麻布台ヒルズ 森JPタワー',
     area: 'お問い合わせ',
-    floor: '—',
+    floor: 'B4–64F',
     rent: '応相談',
     vacancy: 'お問い合わせ',
     tag: 'PREMIUM',
@@ -94,8 +94,8 @@ export const properties = [
   {
     name: '六本木五丁目プロジェクト',
     area: '敷地 約7.9ha',
-    floor: '—',
-    rent: '—',
+    floor: '計画中',
+    rent: '計画中',
     vacancy: '計画中',
     tag: 'PROJECT',
     feature: '延床約106万m²・オフィス貸室約34万m²。六本木ヒルズを超えるスケールの大規模複合プロジェクト。',

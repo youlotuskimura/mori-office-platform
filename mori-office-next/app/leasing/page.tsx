@@ -88,7 +88,7 @@ export default function LeasingPage() {
           <div className="mt-12 grid gap-6 md:grid-cols-3">
             {officeTypes.map((o, i) => (
               <div key={o.t} className="rounded-2xl border border-line p-8">
-                <span className="font-serif text-2xl font-semibold text-ink-400" style={{ color: '#9a978f' }}>
+                <span className="font-serif text-2xl font-semibold text-ink-400">
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <h3 className="mt-5 font-serif text-lg font-semibold text-ink-950">{o.t}</h3>
@@ -133,7 +133,7 @@ export default function LeasingPage() {
             <ol className="mt-10 space-y-6">
               {consultSteps.map((s) => (
                 <li key={s.no} className="flex gap-5">
-                  <span className="font-serif text-2xl font-semibold text-ink-400" style={{ color: '#9a978f' }}>
+                  <span className="font-serif text-2xl font-semibold text-ink-400">
                     {s.no}
                   </span>
                   <div>

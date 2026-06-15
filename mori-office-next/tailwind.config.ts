@@ -13,6 +13,8 @@ const config: Config = {
           700: '#2c2c2a',
           600: '#454440',
           500: '#6b6963',
+          400: '#9a978f',
+          300: '#cfccc4',
         },
         paper: '#ffffff',
         mist: '#f5f4f1',
@@ -37,6 +39,7 @@ const config: Config = {
       },
       animation: {
         rise: 'rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both',
+        'rise-fast': 'rise 0.22s cubic-bezier(0.22, 1, 0.36, 1) both',
       },
     },
   },

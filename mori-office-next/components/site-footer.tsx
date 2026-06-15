@@ -18,9 +18,10 @@ const COLS = [
     ],
   },
   {
-    head: 'ナレッジ',
+    head: 'ワークスタイル知見',
     items: [
-      { label: 'ワークスタイル知見', href: '/insights' },
+      { label: 'MORIワークスタイルラボ', href: '/insights' },
+      { label: '関連コラム', href: '/insights' },
       { label: 'お問い合わせ', href: '/contact' },
     ],
   },

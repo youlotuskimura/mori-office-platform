@@ -40,7 +40,7 @@ export default function TenantsPage() {
         <div className="container-x grid gap-12 py-20 sm:py-24 lg:grid-cols-[1.5fr_1fr]">
           {/* WORKERS BOARD */}
           <div>
-            <SectionHeading eyebrow="Workers Board" title="WORKERS BOARD" lead="館内のお知らせ・サービス更新・イベント情報を、ワーカーへ届ける情報基盤。" />
+            <SectionHeading eyebrow="Tenant Service" title="WORKERS BOARD" lead="館内のお知らせ・サービス更新・イベント情報を、ワーカーへ届ける情報基盤。" />
             <ul className="mt-10 divide-y divide-line border-y border-line">
               {workersBoard.map((b) => (
                 <li key={b.title} className="flex items-start gap-4 py-5">
@@ -115,7 +115,7 @@ export default function TenantsPage() {
                 className="group flex items-center justify-between rounded-xl border border-line bg-paper px-5 py-5 text-left transition-colors hover:border-ink-950"
               >
                 <span className="text-sm font-medium text-ink-900">{a}</span>
-                <span className="text-ink-400 transition-transform duration-300 group-hover:translate-x-1" style={{ color: '#9a978f' }} aria-hidden>
+                <span className="text-ink-400 transition-transform duration-300 group-hover:translate-x-1" aria-hidden>
                   →
                 </span>
               </button>
@@ -148,7 +148,6 @@ export default function TenantsPage() {
                           className={`grid h-4 w-4 place-items-center rounded-full border ${
                             i === 0 ? 'border-ink-950' : 'border-ink-400'
                           }`}
-                          style={i !== 0 ? { borderColor: '#9a978f' } : undefined}
                         >
                           {i === 0 && <span className="h-2 w-2 rounded-full bg-ink-950" />}
                         </span>
@@ -163,7 +162,7 @@ export default function TenantsPage() {
                 <ul className="mt-3 space-y-1.5 text-sm text-ink-600">
                   {rooftopForm.hours.map((h) => (
                     <li key={h} className="flex items-center gap-2">
-                      <span className="h-1 w-1 rounded-full" style={{ background: '#9a978f' }} />
+                      <span className="h-1 w-1 rounded-full bg-ink-400" />
                       {h}
                     </li>
                   ))}

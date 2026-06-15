@@ -93,7 +93,7 @@ export default function ContactPage() {
             </div>
 
             <label className="flex items-start gap-3 text-xs leading-6 text-ink-600">
-              <span className="mt-0.5 grid h-4 w-4 shrink-0 place-items-center rounded border border-ink-400 text-[10px]" style={{ borderColor: '#9a978f' }}>
+              <span className="mt-0.5 grid h-4 w-4 shrink-0 place-items-center rounded border border-ink-400 text-[10px]">
                 ✓
               </span>
               <span>
