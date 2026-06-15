@@ -65,16 +65,24 @@ export default function TenantsPage() {
             <SectionHeading eyebrow="Community" title="コミュニティイベント" />
             <div className="mt-10 space-y-4">
               {events.map((e) => (
-                <div key={e.title} className="rounded-2xl border border-line p-6">
-                  <div className="flex items-center justify-between">
-                    <Tag>{e.cat}</Tag>
-                    <span className="text-xs font-semibold text-ink-500">{e.seats}</span>
-                  </div>
-                  <h3 className="mt-4 font-serif text-lg font-semibold leading-snug text-ink-950">{e.title}</h3>
-                  <div className="mt-4 flex items-center gap-4 text-xs text-ink-600">
-                    <span>{e.date}</span>
-                    <span className="h-3 w-px bg-line" />
-                    <span>{e.place}</span>
+                <div key={e.title} className="overflow-hidden rounded-2xl border border-line">
+                  {e.img && (
+                    <div className="overflow-hidden">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={asset(e.img)} alt="" className="aspect-[16/9] w-full object-cover" />
+                    </div>
+                  )}
+                  <div className="p-6">
+                    <div className="flex items-center justify-between">
+                      <Tag>{e.cat}</Tag>
+                      <span className="text-xs font-semibold text-ink-500">{e.seats}</span>
+                    </div>
+                    <h3 className="mt-4 font-serif text-lg font-semibold leading-snug text-ink-950">{e.title}</h3>
+                    <div className="mt-4 flex items-center gap-4 text-xs text-ink-600">
+                      <span>{e.date}</span>
+                      <span className="h-3 w-px bg-line" />
+                      <span>{e.place}</span>
+                    </div>
                   </div>
                 </div>
               ))}

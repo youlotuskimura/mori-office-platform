@@ -101,6 +101,41 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* HILLS LIFE フォトストリップ */}
+      <section className="overflow-hidden border-t border-line bg-paper">
+        <div className="container-x pb-6 pt-14 sm:pt-18">
+          <Eyebrow>Hills Life</Eyebrow>
+          <p className="mt-4 text-sm leading-7 text-ink-600">
+            ロビー、ラウンジ、ダイニング、ワークスペース。街全体がひとつのキャンパスオフィスです。
+          </p>
+        </div>
+        <div className="pb-12 pl-6 sm:pl-8 lg:pl-12">
+          <div className="flex gap-4 overflow-x-auto pr-6 pb-1 sm:pr-8 lg:pr-12">
+            {[
+              { src: '/brochure/hills-house.jpg', cap: 'Hills House — 麻布台ヒルズ' },
+              { src: '/brochure/tokyo-node-dining.jpg', cap: 'TOKYO NODE Dining — 虎ノ門ヒルズ ステーションタワー' },
+              { src: '/brochure/s-office.jpg', cap: 'S-Office — 麻布台ヒルズ' },
+              { src: '/brochure/arch.jpg', cap: 'ARCH — 虎ノ門ヒルズ' },
+              { src: '/brochure/s-office-lounge.jpg', cap: 'S-Office ラウンジ' },
+              { src: '/brochure/s-office-meeting.jpg', cap: 'ミーティングルーム' },
+            ].map((p) => (
+              <figure key={p.src} className="relative flex-none w-[260px] overflow-hidden rounded-2xl sm:w-[340px]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={asset(p.src)}
+                  alt={p.cap}
+                  className="h-[190px] w-full object-cover sm:h-[240px]"
+                />
+                <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-ink-950/70 to-transparent" />
+                <figcaption className="absolute bottom-0 inset-x-0 px-4 py-3 text-[10px] tracking-wide text-white/80">
+                  {p.cap}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* 街ができること */}
       <section className="bg-ink-950 text-white">
         <div className="container-x py-20 sm:py-28">

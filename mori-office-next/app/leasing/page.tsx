@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { ButtonLink, Eyebrow, SectionHeading, Tag } from '@/components/ui'
+import { VideoThumbnail } from '@/components/video-thumbnail'
 import { properties, consultSteps, leasingStats, officeTypes, sOffice } from '@/lib/data'
 import { asset } from '@/lib/asset'
 
@@ -77,6 +78,40 @@ export default function LeasingPage() {
         </div>
       </section>
 
+      {/* バーチャル内覧 */}
+      <section className="border-b border-line bg-mist">
+        <div className="container-x py-20 sm:py-24">
+          <SectionHeading
+            eyebrow="Virtual Tour"
+            title="バーチャル内覧"
+            lead="主要物件の空間・環境をご検討前に映像でご確認いただけます。オンラインでの内覧もお気軽にご相談ください。"
+          />
+          <div className="mt-12 grid gap-5 lg:grid-cols-2">
+            <VideoThumbnail
+              src="/brochure/tokyo-node.jpg"
+              title="虎ノ門ヒルズ ステーションタワー"
+              subtitle="TOKYO NODE / B1–49F"
+              caption="駅直結の国際新都心"
+            />
+            <VideoThumbnail
+              src="/brochure/hills-house.jpg"
+              title="麻布台ヒルズ 森JPタワー"
+              subtitle="Hills House / B4–64F"
+              caption="HILLS HOUSE 街区ラウンジ 33・34F"
+            />
+          </div>
+          <div className="mt-5">
+            <VideoThumbnail
+              src="/brochure/roppongi5-aerial.jpg"
+              title="六本木五丁目プロジェクト"
+              subtitle="計画中 — 延床約106万m²"
+              caption="六本木五丁目西地区 計画区域 ※ 完成イメージ（計画中につき変更の場合があります）"
+            />
+          </div>
+          <p className="mt-6 text-xs text-ink-500">※ 動画コンテンツは準備中です。内覧のご予約・オンライン相談はお問い合わせよりご連絡ください。</p>
+        </div>
+      </section>
+
       {/* 多様なオフィスの選択肢 */}
       <section className="border-b border-line bg-paper">
         <div className="container-x py-20 sm:py-24">
@@ -118,6 +153,19 @@ export default function LeasingPage() {
               </ButtonLink>
             </div>
           </div>
+
+          {/* S-Office フォトギャラリー */}
+          <div className="mt-4 grid grid-cols-3 gap-2 overflow-hidden rounded-2xl">
+            {[
+              { src: '/brochure/s-office-lounge.jpg', alt: 'S-Office ラウンジ' },
+              { src: '/brochure/s-office-meeting.jpg', alt: 'S-Office ミーティングルーム' },
+              { src: '/brochure/s-office.jpg', alt: 'S-Office ワークスペース' },
+            ].map((p) => (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img key={p.src} src={asset(p.src)} alt={p.alt} className="aspect-[4/3] w-full object-cover" />
+            ))}
+          </div>
+          <p className="mt-2 text-[11px] text-ink-500">麻布台ヒルズ S-Office 室内写真</p>
         </div>
       </section>
 

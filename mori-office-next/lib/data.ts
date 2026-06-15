@@ -152,6 +152,7 @@ export const events = [
     date: '6.18 Thu 18:30',
     place: 'スカイロビー 52F',
     seats: '残り 12 席',
+    img: '/brochure/tokyo-node-dining.jpg',
   },
   {
     title: '新規事業共創ワークショップ vol.7',
@@ -159,6 +160,7 @@ export const events = [
     date: '6.25 Thu 15:00',
     place: 'カンファレンス B',
     seats: '残り 6 席',
+    img: '/brochure/s-office-meeting.jpg',
   },
   {
     title: 'ランチタイムヨガ & マインドフルネス',
@@ -166,6 +168,7 @@ export const events = [
     date: '毎週 火・木 12:15',
     place: 'ウェルネススタジオ',
     seats: '受付中',
+    img: '/brochure/s-office-lounge.jpg',
   },
 ]
 
