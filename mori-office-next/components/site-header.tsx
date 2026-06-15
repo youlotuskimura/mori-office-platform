@@ -70,7 +70,7 @@ export function SiteHeader() {
 
       {/* モバイルメニュー */}
       {open && (
-        <div className="border-t border-line bg-paper lg:hidden">
+        <div className="animate-rise-fast border-t border-line bg-paper lg:hidden">
           <nav className="container-x flex flex-col py-4">
             {NAV.map((n) => (
               <Link

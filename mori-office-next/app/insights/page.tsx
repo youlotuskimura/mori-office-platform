@@ -83,7 +83,7 @@ export default function InsightsPage() {
             {labProgram.map((p) => (
               <li key={p.no} className="grid gap-3 bg-paper p-6 sm:grid-cols-[auto_8rem_1fr] sm:items-baseline sm:gap-6 sm:p-7">
                 <div className="flex items-baseline gap-4">
-                  <span className="font-serif text-2xl font-semibold text-ink-400" style={{ color: '#9a978f' }}>
+                  <span className="font-serif text-2xl font-semibold text-ink-400">
                     {p.no}
                   </span>
                   <span className="text-[11px] font-semibold uppercase tracking-brand text-ink-500">{p.phase}</span>
@@ -111,7 +111,7 @@ export default function InsightsPage() {
           <div className="mt-12 grid gap-6 sm:grid-cols-2">
             {labVoices.map((v, i) => (
               <blockquote key={i} className="rounded-2xl border border-line p-7">
-                <span className="font-serif text-3xl leading-none text-ink-300" style={{ color: '#cfccc4' }} aria-hidden>
+                <span className="font-serif text-3xl leading-none text-ink-300" aria-hidden>
                   &ldquo;
                 </span>
                 <p className="mt-2 text-[15px] leading-8 text-ink-800">{v}</p>
@@ -142,18 +142,25 @@ export default function InsightsPage() {
           <SectionHeading eyebrow="Columns" title="関連コラム" lead="働き方とオフィスをめぐる知見を、リサーチと実例から発信しています。" />
           <div className="mt-12 grid gap-8 lg:grid-cols-3">
             {articles.map((a) => (
-              <article key={a.slug} className="group flex flex-col">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={asset(a.img)} alt="" className="aspect-[16/10] w-full rounded-2xl object-cover" />
+              <article key={a.slug} className="group flex flex-col cursor-pointer">
+                <div className="overflow-hidden rounded-2xl">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={asset(a.img)} alt="" className="aspect-[16/10] w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
+                </div>
                 <div className="mt-6 flex items-center gap-3">
                   <Tag>{a.cat}</Tag>
                   <span className="text-xs text-ink-500">
                     {a.date} ・ {a.read}
                   </span>
                 </div>
-                <h3 className="mt-4 font-serif text-xl font-semibold leading-snug text-ink-950">{a.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-ink-600">{a.excerpt}</p>
-                <span className="mt-5 text-xs text-ink-500">{a.author}</span>
+                <h3 className="mt-4 font-serif text-xl font-semibold leading-snug text-ink-950 transition-colors duration-200 group-hover:text-ink-600">{a.title}</h3>
+                <p className="mt-3 flex-1 text-sm leading-7 text-ink-600">{a.excerpt}</p>
+                <div className="mt-5 flex items-center justify-between">
+                  <span className="text-xs text-ink-500">{a.author}</span>
+                  <span className="inline-flex items-center gap-1 text-xs font-semibold text-ink-950 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+                    続きを読む <span aria-hidden>→</span>
+                  </span>
+                </div>
               </article>
             ))}
           </div>

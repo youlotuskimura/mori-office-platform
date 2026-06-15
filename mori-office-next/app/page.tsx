@@ -17,20 +17,20 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-r from-ink-950/85 via-ink-950/60 to-ink-950/30" />
         <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-ink-950/80 to-transparent" />
         <div className="container-x relative py-28 sm:py-36 lg:py-44">
-          <div className="animate-rise">
+          <div className="animate-rise [animation-delay:0ms]">
             <Eyebrow light>Work Life, beyond the Office</Eyebrow>
           </div>
-          <h1 className="mt-7 max-w-4xl animate-rise font-serif text-[2.4rem] font-semibold leading-[1.16] tracking-tight sm:text-[3.6rem] lg:text-[4.4rem]">
+          <h1 className="mt-7 max-w-4xl animate-rise [animation-delay:120ms] font-serif text-[2.4rem] font-semibold leading-[1.16] tracking-tight sm:text-[3.6rem] lg:text-[4.4rem]">
             オフィスにとどまらない、
             <br className="hidden sm:block" />
             ワークライフを。
           </h1>
-          <p className="mt-7 max-w-xl animate-rise text-base leading-8 text-white/70 sm:text-lg">
+          <p className="mt-7 max-w-xl animate-rise [animation-delay:260ms] text-base leading-8 text-white/70 sm:text-lg">
             立地も、スペックも、そして街全体が。
             <br className="hidden sm:block" />
             企業とワーカーの「働く」を支え、企業価値の向上と持続的成長に寄与します。
           </p>
-          <div className="mt-10 flex flex-wrap gap-3">
+          <div className="mt-10 flex flex-wrap gap-3 animate-rise [animation-delay:380ms]">
             <ButtonLink href="/contact" variant="solid-light">
               内覧を予約する
             </ButtonLink>
@@ -162,7 +162,7 @@ export default function HomePage() {
                         className="flex items-center justify-between gap-3 bg-mist/40 px-4 py-3 text-sm text-ink-800 transition-colors hover:bg-mist"
                       >
                         <span>{it}</span>
-                        <span style={{ color: '#9a978f' }} aria-hidden>
+                        <span className="text-ink-400" aria-hidden>
                           ↗
                         </span>
                       </Link>
