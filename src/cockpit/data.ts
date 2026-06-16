@@ -1,38 +1,448 @@
 // =====================================================================
-// HILLS セールス・コックピット — すべてダミーデータ（架空）
+// HILLS セールス・コックピット — 施設提案ツール（非オフィス施設）
+// すべてダミーデータ（架空）
 // =====================================================================
 
-export interface Building {
-  id: string
-  name: string
-  shortName: string
-  ward: string
-  nearestStation: string
-  access: string[]
-  description: string
-  totalFloors: number
-  tenantCount: number
-  workerCount: number
-  openYear: number
-  industries: { name: string; pct: number; color: string }[]
-  services: string[]
-  differentiators: string[]
-  redevelopment: string
-  amenities: string[]
+export type FacilityCategory =
+  | 'event'      // イベント・会議施設
+  | 'culture'    // 文化・エンタメ
+  | 'club'       // 会員制・接待
+  | 'wellness'   // ウェルネス・フィットネス
+  | 'dining'     // 飲食・ダイニング
+  | 'hotel'      // ホテル・宿泊
+  | 'outdoor'    // 屋外・テラス
+  | 'mobility'   // モビリティ
+
+export interface TimeSlot {
+  from: string
+  to: string
+  status: 'available' | 'reserved' | 'closed'
+  label?: string
 }
 
-export interface Unit {
+export interface Facility {
   id: string
+  name: string
   buildingId: string
-  floor: number
-  area: number
-  rentPerTsubo: number
-  status: 'available' | 'negotiating' | 'closing'
-  availableFrom: string
-  lastUpdated: string
+  buildingShort: string
+  category: FacilityCategory
+  capacity: { min: number; max: number }
+  areaSqm?: number
+  floor: string
+  priceNote: string
+  status: 'available' | 'limited' | 'reserved' | 'maintenance'
+  todaySlots: TimeSlot[]
   features: string[]
-  layoutType: string
+  occasions: string[]
+  description: string
+  salesPoints: string[]
+  contact: string
+  lastUpdated: string
 }
+
+export interface Occasion {
+  id: string
+  label: string
+  icon: string
+}
+
+export const OCCASIONS: Occasion[] = [
+  { id: 'vip_dinner', label: 'VIP接待・ラグジュアリーディナー', icon: '🥂' },
+  { id: 'large_event', label: '大規模イベント・カンファレンス', icon: '🎪' },
+  { id: 'small_meeting', label: '少人数会議・取締役会', icon: '📊' },
+  { id: 'wellness', label: 'ウェルネス体験・福利厚生', icon: '🧘' },
+  { id: 'ceremony', label: '式典・株主総会・発表会', icon: '🎖️' },
+  { id: 'media', label: 'メディア対応・PR・撮影', icon: '🎥' },
+  { id: 'recruitment', label: '採用イベント・会社説明会', icon: '👥' },
+  { id: 'teambuilding', label: 'チームビルディング', icon: '🏆' },
+  { id: 'culture', label: 'アート・文化体験', icon: '🎨' },
+  { id: 'client_tour', label: '顧客招待・施設ツアー', icon: '🌆' },
+]
+
+export const CATEGORY_LABEL: Record<FacilityCategory, string> = {
+  event:    'イベント・会議',
+  culture:  '文化・エンタメ',
+  club:     '会員制・接待',
+  wellness: 'ウェルネス',
+  dining:   'ダイニング',
+  hotel:    'ホテル',
+  outdoor:  '屋外・テラス',
+  mobility: 'モビリティ',
+}
+
+// ── 施設データ ──────────────────────────────────────────────────────
+
+export const facilities: Facility[] = [
+  // ── 虎ノ門ヒルズ ─────────────────────────────────────────────────
+  {
+    id: 'TOKYO_NODE',
+    name: 'TOKYO NODE',
+    buildingId: 'ST',
+    buildingShort: '虎ノ門ST',
+    category: 'event',
+    capacity: { min: 10, max: 1500 },
+    areaSqm: 4300,
+    floor: '45〜49F',
+    priceNote: '120万円〜（規模・利用時間による）',
+    status: 'limited',
+    lastUpdated: '5分前',
+    todaySlots: [
+      { from: '09:00', to: '12:00', status: 'available' },
+      { from: '12:00', to: '18:00', status: 'reserved', label: '某IT企業 製品発表会' },
+      { from: '18:00', to: '22:00', status: 'available' },
+    ],
+    features: ['360°東京パノラマビュー', '国際会議対応（同時通訳ブース）', 'モジュール型フレキシブル空間', '最新AV設備一式', 'ケータリング手配可'],
+    occasions: ['large_event', 'ceremony', 'media', 'recruitment', 'client_tour'],
+    description: '地上45〜49階に広がる多機能複合施設。フォーラム（1500名）、スタジオ、ガーデンが一体的に構成され、カンファレンスから展示会、音楽ライブまで対応。東京タワー・富士山を望む唯一無二のロケーション。',
+    salesPoints: [
+      '✦ 1500名収容・分割利用で〜150名まで対応：スケール感が全く違う',
+      '✦ 「TOKYO NODE でやった」というブランド価値がそのままPRになる',
+      '✦ 発表会・記者会見の映像バックに東京夜景が映える→メディア露出効果大',
+      '✦ 入居テナント企業は優先予約・特別料金で利用可能',
+      '✦ HeloPORT（空飛ぶクルマ）との連携で近未来感を演出',
+    ],
+    contact: '虎ノ門ヒルズ TOKYO NODE 事務局（内線: 内7100）',
+  },
+  {
+    id: 'BT_ARCH_HALL',
+    name: 'ARCHホール',
+    buildingId: 'BT',
+    buildingShort: '虎ノ門BT',
+    category: 'event',
+    capacity: { min: 20, max: 200 },
+    areaSqm: 580,
+    floor: '5F',
+    priceNote: '15万円〜（半日）',
+    status: 'available',
+    lastUpdated: '12分前',
+    todaySlots: [
+      { from: '09:00', to: '13:00', status: 'reserved', label: 'スタートアップ説明会' },
+      { from: '13:00', to: '22:00', status: 'available' },
+    ],
+    features: ['ピッチ登壇ステージ', 'スクリーン3面', '可動式客席', 'スタートアップエコシステム'],
+    occasions: ['large_event', 'recruitment', 'teambuilding', 'small_meeting'],
+    description: 'スタートアップ支援拠点ARCHに設けられたイベントホール。起業家・投資家ネットワークの中心地として、ピッチイベント・採用説明会・研究発表に最適。',
+    salesPoints: [
+      '✦ 「スタートアップが集まる場所」の熱量がそのまま場の空気になる',
+      '✦ 投資家・起業家を招いた合同イベントとの連動が組みやすい',
+      '✦ STのTOKYO NODEより小規模・低コストで虎ノ門アドレスを使いたいときに最適',
+    ],
+    contact: 'ARCH事務局（内線: 内3210）',
+  },
+  {
+    id: 'HELOPORT',
+    name: 'HeloPORT 虎ノ門',
+    buildingId: 'ST',
+    buildingShort: '虎ノ門ST',
+    category: 'mobility',
+    capacity: { min: 1, max: 4 },
+    floor: '屋上',
+    priceNote: '体験フライト: 8万円〜/回（要事前申込）',
+    status: 'limited',
+    lastUpdated: '30分前',
+    todaySlots: [
+      { from: '10:00', to: '11:00', status: 'available', label: '体験フライト' },
+      { from: '13:00', to: '14:00', status: 'available', label: '体験フライト' },
+      { from: '16:00', to: '17:00', status: 'reserved', label: '予約済み' },
+    ],
+    features: ['空飛ぶクルマ（eVTOL）実証離発着', '都心〜羽田・横浜ルート検討中', 'PR・撮影対応可'],
+    occasions: ['media', 'client_tour', 'vip_dinner'],
+    description: '東京初の都市型エアモビリティ拠点。空飛ぶクルマ（eVTOL）の体験フライトや実証実験が行われており、社内イベント・顧客招待での話題性は抜群。',
+    salesPoints: [
+      '✦ 「空飛ぶクルマ体験」は商談・接待・PR問わず最強の話題提供',
+      '✦ テレビ取材・雑誌撮影と連動したPRイベントの企画に最適',
+      '✦ 2027年以降の都市間移動商用化を見据えた先行PR効果',
+    ],
+    contact: 'HeloPORT 運営事務局（内線: 内7200）',
+  },
+
+  // ── 麻布台ヒルズ ──────────────────────────────────────────────────
+  {
+    id: 'AZABU_GALLERY',
+    name: '麻布台ヒルズ ギャラリー',
+    buildingId: 'AZABU',
+    buildingShort: '麻布台',
+    category: 'culture',
+    capacity: { min: 10, max: 400 },
+    areaSqm: 1500,
+    floor: 'B1〜1F',
+    priceNote: 'アフター時間貸し: 50万円〜（要相談）',
+    status: 'available',
+    lastUpdated: '8分前',
+    todaySlots: [
+      { from: '10:00', to: '20:00', status: 'available', label: '通常営業中（一般公開）' },
+      { from: '20:00', to: '23:00', status: 'available', label: 'プライベートレンタル可' },
+    ],
+    features: ['国際レベルの照明・温湿度管理', 'アート作品込みの空間貸し', '専任キュレーターによる解説', 'ケータリング可（要調整）'],
+    occasions: ['vip_dinner', 'culture', 'client_tour', 'media', 'ceremony'],
+    description: '麻布台ヒルズの中核文化施設。国内外の現代アーティストの企画展を年間通じて開催。閉館後のプライベートレンタルでは、アート作品に囲まれた唯一無二の接待・イベントが実現。',
+    salesPoints: [
+      '✦ アート空間での接待は会食だけでは差別化できない「体験価値」を提供',
+      '✦ キュレーターによる個人ガイドツアーをセットにした顧客招待が最も評判良い',
+      '✦ ESG・文化支援の観点で協賛企業としての対外PRにも活用可能',
+      '✦ 撮影可能なアート作品を背景にしたVIP記念撮影も人気',
+    ],
+    contact: 'ギャラリー事業部（内線: 内5100）',
+  },
+  {
+    id: 'AZABU_ROOFTOP',
+    name: '麻布台ヒルズ 屋上庭園テラス',
+    buildingId: 'AZABU',
+    buildingShort: '麻布台',
+    category: 'outdoor',
+    capacity: { min: 20, max: 500 },
+    areaSqm: 6000,
+    floor: '低層棟屋上',
+    priceNote: '30万円〜（2時間・規模による）',
+    status: 'available',
+    lastUpdated: '15分前',
+    todaySlots: [
+      { from: '11:00', to: '14:00', status: 'available' },
+      { from: '14:00', to: '17:00', status: 'reserved', label: 'グリーンイベント' },
+      { from: '18:00', to: '22:00', status: 'available' },
+    ],
+    features: ['緑化面積6万㎡の一部', 'BBQ設備設置可', '東京タワービュー', 'ウェルカムドリンク設置可', 'ペット同伴可（要調整）'],
+    occasions: ['teambuilding', 'client_tour', 'wellness', 'recruitment'],
+    description: '6万㎡の緑地空間に設けられた麻布台ヒルズの屋上テラス。都心とは思えない緑の圧倒感の中でBBQ・ウェルカムパーティ・オープンエアセミナーが開催できる。',
+    salesPoints: [
+      '✦ 都心のビルの屋上とは全く違う「緑に包まれた体験」が他ビルとの最大差別化',
+      '✦ チームビルディング・BBQパーティは申込から即日手配しやすい',
+      '✦ 東京タワーをバックにした夕暮れパーティは感動度が群を抜く',
+      '✦ SDGs・ウェルネス文脈でのイベントPRに最適なロケーション',
+    ],
+    contact: 'グリーン施設管理部（内線: 内5200）',
+  },
+  {
+    id: 'AZABU_SPA',
+    name: 'Hills Spa & Fitness',
+    buildingId: 'AZABU',
+    buildingShort: '麻布台',
+    category: 'wellness',
+    capacity: { min: 1, max: 60 },
+    areaSqm: 2800,
+    floor: '3F',
+    priceNote: '1day利用: 25,000円〜/人（法人契約あり）',
+    status: 'available',
+    lastUpdated: '22分前',
+    todaySlots: [
+      { from: '07:00', to: '10:00', status: 'available', label: '朝のプログラム（残3枠）' },
+      { from: '10:00', to: '17:00', status: 'available' },
+      { from: '17:00', to: '21:00', status: 'available', label: '夕方人気帯（残5枠）' },
+    ],
+    features: ['温浴施設（サウナ・水風呂・浴槽）', '個室トリートメント5室', 'ピラティス・ヨガスタジオ', '栄養士監修ウェルネスドリンク', '法人専用タイム相談可'],
+    occasions: ['wellness', 'vip_dinner', 'teambuilding', 'client_tour'],
+    description: '麻布台ヒルズ3Fに位置する都市型スパ。温浴・スパトリートメント・フィットネスが一体となった施設。VIP接待前の準備やウェルネス体験ギフトとして法人利用が増加中。',
+    salesPoints: [
+      '✦ 接待前に相手をスパでもてなしてから夕食へという「フルコース接待」が最高評価',
+      '✦ 健康経営・ウェルネス施策の一環として法人契約（月額固定）で手配しやすい',
+      '✦ 英語対応スタッフ常駐：外国人エグゼクティブのVIP対応に安心',
+    ],
+    contact: 'Hills Spa 予約センター（内線: 内5300）',
+  },
+  {
+    id: 'BRITISH_SCHOOL',
+    name: 'British School in Tokyo',
+    buildingId: 'AZABU',
+    buildingShort: '麻布台',
+    category: 'hotel', // 教育だが近接施設として
+    capacity: { min: 1, max: 1 },
+    floor: '低層棟',
+    priceNote: '入学相談は学校直接',
+    status: 'available',
+    lastUpdated: '1時間前',
+    todaySlots: [],
+    features: ['英国式インターナショナル教育', '3〜18歳対象', '麻布台ヒルズに直結'],
+    occasions: ['client_tour'],
+    description: '麻布台ヒルズに隣接するインターナショナルスクール。外国人エグゼクティブの家族受入環境として、入居提案時の差別化ポイントとして紹介可能。',
+    salesPoints: [
+      '✦ 「子供の学校がオフィスに直結」は外国人幹部家族の日本赴任決め手になる',
+      '✦ 麻布台ヒルズを選ぶ外資系企業のHR部門への提案で必ず触れるべきポイント',
+    ],
+    contact: 'British School in Tokyo（代表 03-XXXX-XXXX）',
+  },
+
+  // ── 六本木ヒルズ ──────────────────────────────────────────────────
+  {
+    id: 'MORI_MUSEUM',
+    name: '森美術館',
+    buildingId: 'MORI',
+    buildingShort: '六本木',
+    category: 'culture',
+    capacity: { min: 10, max: 300 },
+    areaSqm: 2500,
+    floor: '53F',
+    priceNote: 'プライベート貸切: 80万円〜（アフター）',
+    status: 'available',
+    lastUpdated: '1分前',
+    todaySlots: [
+      { from: '10:00', to: '22:00', status: 'available', label: '通常営業中（一般公開）' },
+      { from: '22:00', to: '24:00', status: 'available', label: 'アフター貸切枠' },
+    ],
+    features: ['国際現代アート 53F特設展示', '専任キュレーターによる解説', '閉館後プライベート鑑賞', '東京タワー・スカイライン一望', 'ケータリング設置可'],
+    occasions: ['vip_dinner', 'culture', 'client_tour', 'media', 'ceremony'],
+    description: '53階、地上238mに位置する世界有数の現代アート美術館。企画展は常にアジアトップクラスのクオリティ。閉館後の貸切では夜景と現代アートを独占するという、東京で唯一の体験が提供できる。',
+    salesPoints: [
+      '✦ 世界のビジネスエリートが「Tokyo, Mori Art Museum」を知っている→外国人VIP接待に最強',
+      '✦ 閉館後の夜景×アート独占は「お金では普通買えない体験」→記憶に残る接待',
+      '✦ 六本木ヒルズ入居企業は招待状配布の優遇制度あり→年間通じた顧客関係構築に活用',
+    ],
+    contact: '森美術館 法人担当（内線: 内8100）',
+  },
+  {
+    id: 'CITY_VIEW',
+    name: '東京シティビュー（展望台）',
+    buildingId: 'MORI',
+    buildingShort: '六本木',
+    category: 'culture',
+    capacity: { min: 1, max: 400 },
+    areaSqm: 3600,
+    floor: '52F',
+    priceNote: 'プライベート貸切: 60万円〜 / 通常: 2,000円/人',
+    status: 'available',
+    lastUpdated: '3分前',
+    todaySlots: [
+      { from: '10:00', to: '23:00', status: 'available', label: '通常営業' },
+      { from: '23:00', to: '25:00', status: 'available', label: 'ナイト貸切可' },
+    ],
+    features: ['360°東京パノラマ（地上250m）', 'スカイデッキ（屋外）', 'ウェルカムドリンクカウンター', 'フォトスポット複数', '音楽・照明演出可'],
+    occasions: ['client_tour', 'vip_dinner', 'teambuilding', 'media', 'recruitment'],
+    description: '地上250mから東京の全景を一望。富士山・東京タワー・お台場を一度に見渡せる関東屈指の展望スポット。法人貸切では乾杯セレモニーやカクテルパーティを組み合わせた特別演出が可能。',
+    salesPoints: [
+      '✦ 「まず展望台で乾杯を」——外国人ゲストへの東京紹介として鉄板の人気',
+      '✦ 新任幹部の歓迎会・プロジェクト打ち上げに非日常感を添えやすい',
+      '✦ 採用イベントで「入社したらこんな環境で働く」を体感させる効果大',
+    ],
+    contact: '東京シティビュー 法人窓口（内線: 内8200）',
+  },
+  {
+    id: 'HILLS_CLUB',
+    name: '六本木ヒルズクラブ',
+    buildingId: 'MORI',
+    buildingShort: '六本木',
+    category: 'club',
+    capacity: { min: 2, max: 120 },
+    floor: '51F',
+    priceNote: '会員制（入居企業は優待あり）/ 個室: 10万円〜',
+    status: 'limited',
+    lastUpdated: '10分前',
+    todaySlots: [
+      { from: '11:30', to: '14:00', status: 'available', label: 'ランチ（残3テーブル）' },
+      { from: '18:00', to: '23:00', status: 'available', label: 'ディナー（残2個室）' },
+    ],
+    features: ['会員制倶楽部（51F・高層）', '個室ダイニング7室', 'バー・ラウンジ', '専属ソムリエ', '秘書サービス連携'],
+    occasions: ['vip_dinner', 'small_meeting', 'client_tour'],
+    description: '地上51階、六本木ヒルズクラブは経営者・エグゼクティブのための会員制倶楽部。六本木ヒルズ入居企業は優待制度を通じて利用しやすく、重要接待・取締役会後のディナーに使われる。',
+    salesPoints: [
+      '✦ 「ヒルズクラブのメンバーシップ」は経営者層への訴求力が絶大',
+      '✦ 他社の役員を招いた接待で「格が伝わる」—— 金額以上のブランド効果',
+      '✦ 入居テナント向け優待プログラムで月次利用をアレンジしやすい',
+    ],
+    contact: '六本木ヒルズクラブ（内線: 内8300）',
+  },
+  {
+    id: 'GRAND_HYATT',
+    name: 'グランドハイアット東京',
+    buildingId: 'MORI',
+    buildingShort: '六本木',
+    category: 'hotel',
+    capacity: { min: 2, max: 1000 },
+    floor: '1〜13F',
+    priceNote: '宿泊: 6万円〜/泊 / 宴会場: 50万円〜',
+    status: 'available',
+    lastUpdated: '20分前',
+    todaySlots: [
+      { from: '07:00', to: '23:00', status: 'available', label: '宿泊・宴会受付中' },
+    ],
+    features: ['六本木ヒルズ徒歩30秒', '世界レベルのラグジュアリーホテル', '大宴会場（1000名）', '多言語スタッフ', 'VIPスイート'],
+    occasions: ['vip_dinner', 'ceremony', 'large_event', 'client_tour'],
+    description: '六本木ヒルズ内に直結するラグジュアリーホテル。シームレスな移動でオフィス→ディナー→宿泊が完結。国際会議や株主総会後の宴会手配に多く使われる。',
+    salesPoints: [
+      '✦ ヒルズ内でホテル手配まで完結→外国人ゲストの移動ストレスゼロ',
+      '✦ 宴会場×展望台×美術館の三点セット提案が他のエリアでは絶対真似できない',
+      '✦ ホテルコンシェルジュとの連携で「おまかせVIPプロデュース」が可能',
+    ],
+    contact: 'グランドハイアット東京 イベント部（03-XXXX-1234）',
+  },
+  {
+    id: 'KEYAKI_DINING',
+    name: 'けやき坂プレミアムダイニング群',
+    buildingId: 'KEYAKI',
+    buildingShort: '六本木KZ',
+    category: 'dining',
+    capacity: { min: 2, max: 80 },
+    floor: '1〜3F',
+    priceNote: '1名: 15,000〜50,000円（店舗による）',
+    status: 'available',
+    lastUpdated: '7分前',
+    todaySlots: [
+      { from: '11:30', to: '14:30', status: 'available', label: 'ランチ席あり（複数店舗）' },
+      { from: '18:00', to: '23:00', status: 'available', label: 'ディナー（混雑予想・早めに）' },
+    ],
+    features: ['ミシュラン掲載3店舗を含む', '個室完備の店舗複数あり', 'ブランドショップに囲まれたけやき坂', 'VIPルーム相談可', '駐車場バレー手配可'],
+    occasions: ['vip_dinner', 'small_meeting', 'client_tour'],
+    description: 'けやき坂沿いに並ぶ六本木ヒルズの飲食フロア。フレンチ・鉄板焼き・日本料理などミシュラン掲載店を含む高級レストランが集積。商談後のディナーをシームレスにアレンジできる。',
+    salesPoints: [
+      '✦ 「打ち合わせの後、けやき坂でディナーに」—— 商談→接待を一つのヒルズ体験として完結',
+      '✦ 複数店の個室を押さえておけば人数変更に対応しやすい',
+      '✦ 夜のけやき坂の景観（イルミネーション）がゲストに特別感を与える',
+    ],
+    contact: 'テナント管理部 飲食担当（内線: 内8500）',
+  },
+
+  // ── アーク森ビル ──────────────────────────────────────────────────
+  {
+    id: 'ARK_HILLS_CLUB',
+    name: 'アークヒルズ クラブ',
+    buildingId: 'ARK',
+    buildingShort: 'アーク',
+    category: 'club',
+    capacity: { min: 2, max: 80 },
+    floor: '37F',
+    priceNote: '法人会員制 / ゲスト利用: 要相談',
+    status: 'available',
+    lastUpdated: '35分前',
+    todaySlots: [
+      { from: '11:30', to: '14:00', status: 'available', label: 'ランチ空きあり' },
+      { from: '18:00', to: '22:00', status: 'available', label: 'ディナー受付中' },
+    ],
+    features: ['37F からの眺望', 'ビジネスラウンジ', 'プライベートダイニング', '秘書サービス連携', '霞が関・溜池山王エリア'],
+    occasions: ['vip_dinner', 'small_meeting', 'client_tour'],
+    description: 'アーク森ビル37階のクラブラウンジ。コンサル・法務・官公庁系テナントが多く利用する静かな接待空間。六本木ヒルズクラブと比べると落ち着いた雰囲気で、実務系の重要会食に好評。',
+    salesPoints: [
+      '✦ 「六本木よりも落ち着いた雰囲気で使いたい」というニーズに最適',
+      '✦ 霞が関・永田町との距離感が官公庁・コンサル系の接待に刺さる',
+      '✦ アーク入居テナントは優待利用可能',
+    ],
+    contact: 'アークヒルズクラブ担当（内線: 内2100）',
+  },
+  {
+    id: 'SUNTORY_HALL',
+    name: 'サントリーホール（連携施設）',
+    buildingId: 'ARK',
+    buildingShort: 'アーク隣接',
+    category: 'culture',
+    capacity: { min: 50, max: 2006 },
+    floor: '1〜3F',
+    priceNote: '法人貸切: 200万円〜（アフター）/ 企業協賛制度あり',
+    status: 'available',
+    lastUpdated: '45分前',
+    todaySlots: [
+      { from: '14:00', to: '18:00', status: 'reserved', label: '公演（一般販売）' },
+      { from: '19:00', to: '21:00', status: 'reserved', label: '公演（一般販売）' },
+    ],
+    features: ['世界屈指のクラシック音楽ホール', '2006席のワインヤード形式', '企業協賛・貸切プログラム', 'フォワイエ（ロビー）レセプション可'],
+    occasions: ['vip_dinner', 'ceremony', 'client_tour', 'media'],
+    description: 'アーク森ビル隣接の世界的コンサートホール。演奏会チケット法人取りまとめ・VIPシート手配・公演後のレセプションなど、文化的な接待の最高峰を組み立てられる。',
+    salesPoints: [
+      '✦ クラシック音楽×一流ホール×アーク近接——文化的接待の格が段違い',
+      '✦ 企業協賛プログラムを通じた対外ブランディング（プログラムへの社名掲載等）',
+      '✦ 公演後にアークヒルズクラブでディナー——コンサート接待の黄金パターン',
+    ],
+    contact: '（外部連携）サントリーホール 法人担当（03-3505-XXXX）',
+  },
+]
+
+// ── 顧客・商談 ────────────────────────────────────────────────────────
 
 export interface Customer {
   id: string
@@ -42,19 +452,18 @@ export interface Customer {
   phone: string
   inquiryDate: string
   requirements: {
+    occasion: string
     headcount: number
-    areaMin: number
-    areaMax: number
-    budgetMax: number
-    preferredArea: string[]
-    timeline: string
+    budgetNote: string
+    preferredHills: string[]
+    dateNote: string
     priorities: string[]
   }
 }
 
 export interface TimelineEvent {
   date: string
-  type: 'inquiry' | 'proposal' | 'tour' | 'negotiation' | 'note' | 'closed'
+  type: 'inquiry' | 'proposal' | 'tour' | 'negotiation' | 'note' | 'booked'
   title: string
   detail: string
 }
@@ -62,273 +471,14 @@ export interface TimelineEvent {
 export interface Deal {
   id: string
   customerId: string
-  stage: 'inquiry' | 'proposal' | 'tour' | 'negotiation' | 'closed'
+  stage: 'inquiry' | 'proposal' | 'tour' | 'negotiation' | 'booked'
   probability: number
   nextAction: string
   nextActionDate: string
   assignee: string
+  relatedFacilities: string[]
   timeline: TimelineEvent[]
 }
-
-// ── ビル ──────────────────────────────────────────────────────────────
-
-export const buildings: Building[] = [
-  {
-    id: 'ST',
-    name: '虎ノ門ヒルズ ステーションタワー',
-    shortName: 'ST',
-    ward: '港区虎ノ門',
-    nearestStation: '虎ノ門ヒルズ駅',
-    access: ['東京メトロ日比谷線 直結', '銀座線 虎ノ門駅 徒歩3分', '神谷町駅 徒歩5分'],
-    description: '2023年竣工。東京メトロ日比谷線直結、地上49階建て。国際基準グレードA仕様のフルスペックビル。スタートアップから大手外資・国内大企業まで幅広く入居。',
-    totalFloors: 49,
-    tenantCount: 142,
-    workerCount: 22000,
-    openYear: 2023,
-    industries: [
-      { name: 'IT・テック', pct: 32, color: '#4a8568' },
-      { name: '金融・投資', pct: 24, color: '#b59461' },
-      { name: 'コンサル・専門職', pct: 18, color: '#6aa589' },
-      { name: 'グローバル企業', pct: 16, color: '#2f5d45' },
-      { name: 'その他', pct: 10, color: '#c8bfb0' },
-    ],
-    services: [
-      '24時間セキュリティ対応',
-      'TOKYO NODE（会議・イベント施設、地上45F）',
-      'コンシェルジュサービス',
-      'フィットネスジム（入居者専用）',
-      '保育施設 Hills Kids',
-      '地下直結ショッピング・飲食45店舗',
-      'HeloPORT（空飛ぶクルマ離発着実証）',
-    ],
-    differentiators: [
-      '✦ 東京メトロ直結で雨に濡れずアクセス可。ワーカー採用力が直結',
-      '✦ TOKYO NODEで大型イベント・株主総会・記者会見まで対応',
-      '✦ スタートアップ〜大手が混在するエコシステム：偶発的共創が起きやすい',
-      '✦ 竣工2023年：設備・BCP・ZEB水準が最新',
-      '✦ HeloPORTで近未来の移動手段と接続（話題性・PR効果）',
-    ],
-    redevelopment: '虎ノ門〜麻布台エリアの再開発計画が継続中。周辺地価・人材吸引力は中長期的に上昇見込み。',
-    amenities: ['展望施設', '美術館スペース', '国際ホテル隣接', '医療クリニック', 'コンビニ・薬局'],
-  },
-  {
-    id: 'BT',
-    name: '虎ノ門ヒルズ ビジネスタワー',
-    shortName: 'BT',
-    ward: '港区虎ノ門',
-    nearestStation: '虎ノ門ヒルズ駅',
-    access: ['東京メトロ日比谷線 徒歩1分', '銀座線 虎ノ門駅 徒歩5分'],
-    description: '2020年竣工。地上36階建て。スタートアップ支援施設「ARCH」を核に、成長フェーズの企業が集積するイノベーションタワー。',
-    totalFloors: 36,
-    tenantCount: 88,
-    workerCount: 14000,
-    openYear: 2020,
-    industries: [
-      { name: 'スタートアップ', pct: 38, color: '#4a8568' },
-      { name: 'IT・テック', pct: 26, color: '#6aa589' },
-      { name: 'ベンチャーキャピタル', pct: 20, color: '#b59461' },
-      { name: 'メディア・PR', pct: 10, color: '#2f5d45' },
-      { name: 'その他', pct: 6, color: '#c8bfb0' },
-    ],
-    services: [
-      'ARCH（森ビル公認スタートアップ支援施設）',
-      '起業家・投資家ネットワークイベント（月4回以上）',
-      '共有ラウンジ・ミーティングポッド',
-      '24時間セキュリティ',
-      '飲食・コンビニ（低層階）',
-    ],
-    differentiators: [
-      '✦ ARCHによる公式スタートアップ採択制度：VCとの接点が生まれやすい',
-      '✦ 「スタートアップが集まる場所」としてのブランド価値が採用力に直結',
-      '✦ STより賃料帯が低め：成長フェーズ企業のコスト最適解',
-      '✦ STと同一エリアで将来のSTへの移転・拡張シナリオが描きやすい',
-    ],
-    redevelopment: '虎ノ門地区再開発の中心的役割。商業・住宅・ホテル複合の整備が進行中。',
-    amenities: ['スタートアップイベントホール', 'ウォークインクロゼット', '保育所連携', '飲食テラス'],
-  },
-  {
-    id: 'AZABU',
-    name: '麻布台ヒルズ マーケット',
-    shortName: '麻布台',
-    ward: '港区麻布台',
-    nearestStation: '神谷町駅',
-    access: ['東京メトロ日比谷線 神谷町駅 徒歩5分', '六本木一丁目駅 徒歩7分'],
-    description: '2023年竣工。地上64階建て（タワーA）。「緑に包まれた都市」をコンセプトに、オフィス・住宅・ホテル・学校・美術館が共存する次世代型複合開発。',
-    totalFloors: 64,
-    tenantCount: 106,
-    workerCount: 20000,
-    openYear: 2023,
-    industries: [
-      { name: 'グローバル企業', pct: 30, color: '#4a8568' },
-      { name: 'ライフサイエンス・医療', pct: 22, color: '#2f5d45' },
-      { name: 'IT・テック', pct: 20, color: '#6aa589' },
-      { name: 'コンサル・法務', pct: 16, color: '#b59461' },
-      { name: 'その他', pct: 12, color: '#c8bfb0' },
-    ],
-    services: [
-      '麻布台ヒルズ ギャラリー（現代アート）',
-      'インターナショナルスクール（British School in Tokyo）',
-      'スーパー・マーケット（ドン・ドン・ドンキ）',
-      'Accor旗艦ホテル（パーク ハイアット 東京隣接）',
-      'ウェルネス施設・クリニックモール',
-      '屋上庭園・緑化面積60,000㎡',
-      '会員制クラブラウンジ（上層階）',
-    ],
-    differentiators: [
-      '✦ 「緑・アート・ウェルネス」が最強のリテンション材料。離職防止効果あり',
-      '✦ ギャラリー・展望施設をそのまま接待・顧客招待に使える',
-      '✦ インターナショナルスクール隣接：外国人エグゼクティブのファミリー誘致に最適',
-      '✦ ライフサイエンス・グローバル企業の集積：業種シナジーが高い',
-      '✦ 竣工2023年：ZEB対応・LCA設計で対外ESG報告が強化できる',
-    ],
-    redevelopment: '周辺の麻布台1丁目地区の整備が継続。六本木一丁目との連続した歩行者デッキ計画あり。',
-    amenities: ['現代アート美術館', '屋上庭園', 'インターナショナルスクール', 'クリニックモール', '会員制ラウンジ'],
-  },
-  {
-    id: 'MORI',
-    name: '六本木ヒルズ 森タワー',
-    shortName: '六本木',
-    ward: '港区六本木',
-    nearestStation: '六本木駅',
-    access: ['東京メトロ日比谷線 六本木駅 直結', '都営大江戸線 六本木駅 徒歩4分'],
-    description: '2003年竣工。地上54階建て。20年超の成熟エコシステム。森美術館・東京シティビュー・会員制六本木ヒルズクラブが同居し、文化・ビジネス・接待の三位一体を実現。',
-    totalFloors: 54,
-    tenantCount: 230,
-    workerCount: 35000,
-    openYear: 2003,
-    industries: [
-      { name: '大手事業会社', pct: 28, color: '#2f5d45' },
-      { name: 'メディア・広告', pct: 22, color: '#b59461' },
-      { name: 'IT・テック', pct: 20, color: '#4a8568' },
-      { name: '金融・保険', pct: 18, color: '#6aa589' },
-      { name: 'その他', pct: 12, color: '#c8bfb0' },
-    ],
-    services: [
-      '森美術館（世界有数の現代アート美術館）',
-      '東京シティビュー（展望台）',
-      '六本木ヒルズクラブ（会員制倶楽部）',
-      'グランドハイアット東京（隣接ホテル）',
-      'テレビ朝日・ショッピング施設200店舗以上',
-      '映画館TOHOシネマズ',
-      '24時間セキュリティ・コンシェルジュ',
-    ],
-    differentiators: [
-      '✦ 20年超の実績：「六本木ヒルズ入居」ブランドが対外信用力・採用力に直結',
-      '✦ 森美術館・クラブで接待・文化事業がその場で完結',
-      '✦ テナント密度No.1：異業種との偶発的共創が最も起きやすい環境',
-      '✦ 竣工物件のため賃料は新築比で割安感がある（コスト面での優位）',
-      '✦ ヒルズ内イベント・コミュニティが最多：エンゲージメント施策に活用しやすい',
-    ],
-    redevelopment: '六本木ヒルズ ノースタワー構想（計画中）。追加開発で商業・文化機能の拡張を予定。',
-    amenities: ['森美術館', '展望台', '会員制クラブ', '映画館', '国際ホテル', 'TV局'],
-  },
-  {
-    id: 'KEYAKI',
-    name: '六本木ヒルズ けやき坂コンプレックス',
-    shortName: 'けやき坂',
-    ward: '港区六本木',
-    nearestStation: '六本木駅',
-    access: ['東京メトロ日比谷線 六本木駅 徒歩5分', '都営大江戸線 六本木駅 徒歩5分'],
-    description: '六本木ヒルズの低層棟群。ブランドショップ・レストラン街が並ぶけやき坂に面し、クリエイティブ系・ブランド企業が集積。小〜中規模区画が中心。',
-    totalFloors: 10,
-    tenantCount: 64,
-    workerCount: 9000,
-    openYear: 2003,
-    industries: [
-      { name: 'クリエイティブ・デザイン', pct: 35, color: '#b59461' },
-      { name: 'ファッション・リテール', pct: 28, color: '#6aa589' },
-      { name: 'PR・マーケティング', pct: 22, color: '#4a8568' },
-      { name: 'エンタメ・音楽', pct: 10, color: '#2f5d45' },
-      { name: 'その他', pct: 5, color: '#c8bfb0' },
-    ],
-    services: [
-      'けやき坂の高級ブランドショッピング',
-      'レストラン街（ミシュラン掲載店含む）',
-      '六本木ヒルズアリーナ（野外イベント）',
-      'グランドハイアット東京 徒歩1分',
-    ],
-    differentiators: [
-      '✦ クリエイティブ・ブランド業界の集積地：業種シナジーが最高',
-      '✦ けやき坂のブランド景観が採用面接・接客に際立った印象を与える',
-      '✦ 小〜中規模区画：コスト最適化しながら六本木ヒルズアドレスを取得',
-    ],
-    redevelopment: '六本木ヒルズ全体の回遊動線整備計画が進行中。',
-    amenities: ['野外アリーナ', 'ブランドショッピング', 'ミシュラン飲食店'],
-  },
-  {
-    id: 'ARK',
-    name: 'アーク森ビル',
-    shortName: 'アーク',
-    ward: '港区赤坂',
-    nearestStation: '六本木一丁目駅',
-    access: ['東京メトロ南北線 六本木一丁目駅 直結', '銀座線 溜池山王駅 徒歩6分'],
-    description: '1986年竣工（リニューアル継続実施）。南北線直結アクセスが強み。霞が関・永田町に近く、政府機関・官公庁との連携が必要な企業に支持されている。賃料コスパが高い。',
-    totalFloors: 38,
-    tenantCount: 110,
-    workerCount: 18000,
-    openYear: 1986,
-    industries: [
-      { name: 'コンサル・シンクタンク', pct: 30, color: '#b59461' },
-      { name: '商社・製造', pct: 24, color: '#2f5d45' },
-      { name: '法務・会計', pct: 20, color: '#4a8568' },
-      { name: 'IT・テック', pct: 16, color: '#6aa589' },
-      { name: 'その他', pct: 10, color: '#c8bfb0' },
-    ],
-    services: [
-      '六本木一丁目駅直結（雨天対応）',
-      'アークヒルズサウスタワー等と連結する低層商業',
-      'カフェ・レストラン・コンビニ',
-      '会議室レンタルサービス',
-    ],
-    differentiators: [
-      '✦ 霞が関・永田町へ地下鉄1駅：省庁との打ち合わせが多い業種に最適',
-      '✦ ヒルズ物件の中で最もコスパが高い：スペック対賃料比に優れる',
-      '✦ 安定した大企業・コンサル集積：業種シナジーが高い',
-      '✦ 駅直結で天候リスクなし：ワーカーの移動快適性が高い',
-    ],
-    redevelopment: 'アーク都市軸整備計画：六本木ヒルズ・麻布台ヒルズとの歩行者ネットワーク整備が2027年完成予定。',
-    amenities: ['地下鉄直結', '低層商業施設', 'カフェ・飲食'],
-  },
-]
-
-// ── 区画（空室ユニット）─────────────────────────────────────────────
-
-export const units: Unit[] = [
-  // ST
-  { id: 'ST-22A', buildingId: 'ST', floor: 22, area: 350, rentPerTsubo: 10.5, status: 'available', availableFrom: '即入居可', lastUpdated: '2分前', features: ['角部屋', '自然採光', 'OAフロア'], layoutType: 'オープン' },
-  { id: 'ST-31B', buildingId: 'ST', floor: 31, area: 180, rentPerTsubo: 11.2, status: 'negotiating', availableFrom: '2026年8月', lastUpdated: '45分前', features: ['高層眺望', '既存間仕切あり'], layoutType: 'ゾーニング' },
-  { id: 'ST-38A', buildingId: 'ST', floor: 38, area: 500, rentPerTsubo: 12.0, status: 'closing', availableFrom: '2026年10月', lastUpdated: '1時間前', features: ['超高層', '2フロア連結可', 'テラス付'], layoutType: 'スケルトン' },
-  { id: 'ST-15C', buildingId: 'ST', floor: 15, area: 220, rentPerTsubo: 9.8, status: 'available', availableFrom: '即入居可', lastUpdated: '12分前', features: ['スタンダード', 'OAフロア'], layoutType: 'オープン' },
-
-  // BT
-  { id: 'BT-15A', buildingId: 'BT', floor: 15, area: 240, rentPerTsubo: 9.8, status: 'available', availableFrom: '即入居可', lastUpdated: '15分前', features: ['スタートアップ向け', 'ARCHフロア近接'], layoutType: 'オープン' },
-  { id: 'BT-19B', buildingId: 'BT', floor: 19, area: 120, rentPerTsubo: 10.2, status: 'available', availableFrom: '即入居可', lastUpdated: '8分前', features: ['小規模向け', '眺望良好'], layoutType: 'オープン' },
-  { id: 'BT-22A', buildingId: 'BT', floor: 22, area: 300, rentPerTsubo: 10.5, status: 'negotiating', availableFrom: '2026年9月', lastUpdated: '2時間前', features: ['角部屋', '2面採光'], layoutType: 'ゾーニング' },
-
-  // AZABU
-  { id: 'AZABU-8A', buildingId: 'AZABU', floor: 8, area: 160, rentPerTsubo: 11.5, status: 'negotiating', availableFrom: '2026年8月', lastUpdated: '30分前', features: ['緑地ビュー', 'ウェルネス階'], layoutType: 'オープン' },
-  { id: 'AZABU-12B', buildingId: 'AZABU', floor: 12, area: 420, rentPerTsubo: 12.8, status: 'available', availableFrom: '即入居可', lastUpdated: '5分前', features: ['超広い', 'スケルトン引渡可', '美術館同フロア'], layoutType: 'スケルトン' },
-  { id: 'AZABU-14C', buildingId: 'AZABU', floor: 14, area: 280, rentPerTsubo: 13.0, status: 'negotiating', availableFrom: '2026年9月', lastUpdated: '2時間前', features: ['高層', '港区全景'], layoutType: 'ゾーニング' },
-  { id: 'AZABU-20A', buildingId: 'AZABU', floor: 20, area: 380, rentPerTsubo: 14.2, status: 'closing', availableFrom: '2026年11月', lastUpdated: '20分前', features: ['超高層', '東京タワービュー'], layoutType: 'スケルトン' },
-
-  // MORI
-  { id: 'MORI-25A', buildingId: 'MORI', floor: 25, area: 300, rentPerTsubo: 8.9, status: 'available', availableFrom: '即入居可', lastUpdated: '1分前', features: ['六本木一等地', '標準仕様'], layoutType: 'オープン' },
-  { id: 'MORI-30B', buildingId: 'MORI', floor: 30, area: 450, rentPerTsubo: 9.5, status: 'negotiating', availableFrom: '2026年9月', lastUpdated: '20分前', features: ['超広い', '美術館近接'], layoutType: 'ゾーニング' },
-  { id: 'MORI-33C', buildingId: 'MORI', floor: 33, area: 150, rentPerTsubo: 9.8, status: 'available', availableFrom: '即入居可', lastUpdated: '10分前', features: ['高層', '採光良好'], layoutType: 'オープン' },
-  { id: 'MORI-40A', buildingId: 'MORI', floor: 40, area: 200, rentPerTsubo: 10.5, status: 'closing', availableFrom: '2026年7月', lastUpdated: '3分前', features: ['超高層', '展望台同フロア'], layoutType: 'スケルトン' },
-
-  // KEYAKI
-  { id: 'KEYAKI-6A', buildingId: 'KEYAKI', floor: 6, area: 90, rentPerTsubo: 8.5, status: 'available', availableFrom: '即入居可', lastUpdated: '40分前', features: ['けやき坂ビュー', 'コンパクト'], layoutType: 'オープン' },
-  { id: 'KEYAKI-8B', buildingId: 'KEYAKI', floor: 8, area: 110, rentPerTsubo: 8.8, status: 'negotiating', availableFrom: '2026年8月', lastUpdated: '55分前', features: ['クリエイティブ向け', 'ブランド環境'], layoutType: 'オープン' },
-
-  // ARK
-  { id: 'ARK-5A', buildingId: 'ARK', floor: 5, area: 200, rentPerTsubo: 7.5, status: 'available', availableFrom: '即入居可', lastUpdated: '25分前', features: ['コスパ最高', '駅直結'], layoutType: 'オープン' },
-  { id: 'ARK-7B', buildingId: 'ARK', floor: 7, area: 350, rentPerTsubo: 7.8, status: 'available', availableFrom: '即入居可', lastUpdated: '12分前', features: ['広め', '2面採光'], layoutType: 'ゾーニング' },
-  { id: 'ARK-9C', buildingId: 'ARK', floor: 9, area: 150, rentPerTsubo: 7.2, status: 'negotiating', availableFrom: '2026年8月', lastUpdated: '3時間前', features: ['小規模向け', '霞が関近接'], layoutType: 'オープン' },
-  { id: 'ARK-12A', buildingId: 'ARK', floor: 12, area: 280, rentPerTsubo: 8.0, status: 'available', availableFrom: '即入居可', lastUpdated: '18分前', features: ['中層', '標準仕様'], layoutType: 'オープン' },
-]
-
-// ── 顧客・商談 ────────────────────────────────────────────────────────
 
 export const customers: Customer[] = [
   {
@@ -339,13 +489,12 @@ export const customers: Customer[] = [
     phone: '090-XXXX-0001',
     inquiryDate: '2026-06-10',
     requirements: {
-      headcount: 80,
-      areaMin: 120,
-      areaMax: 250,
-      budgetMax: 280,
-      preferredArea: ['虎ノ門', '六本木'],
-      timeline: '2026年8〜9月',
-      priorities: ['採用力', 'スタートアップ環境', 'ブランド'],
+      occasion: '採用イベント・会社説明会',
+      headcount: 150,
+      budgetNote: '30〜50万円',
+      preferredHills: ['虎ノ門'],
+      dateNote: '7月中旬、平日夕方',
+      priorities: ['スタートアップ感', 'アクセスの良さ', '若い人向けの空間'],
     },
   },
   {
@@ -356,13 +505,12 @@ export const customers: Customer[] = [
     phone: '090-XXXX-0002',
     inquiryDate: '2026-06-08',
     requirements: {
-      headcount: 200,
-      areaMin: 300,
-      areaMax: 500,
-      budgetMax: 600,
-      preferredArea: ['麻布台', '虎ノ門'],
-      timeline: '2026年10〜12月',
-      priorities: ['立地・アクセス', '格式・ブランド', 'セキュリティ'],
+      occasion: 'VIP接待・ラグジュアリーディナー',
+      headcount: 8,
+      budgetNote: '50万円以上',
+      preferredHills: ['六本木', '麻布台'],
+      dateNote: '今週金曜夜',
+      priorities: ['格式', '眺望', 'プライベート感', '外国人ゲスト対応'],
     },
   },
   {
@@ -373,13 +521,12 @@ export const customers: Customer[] = [
     phone: '090-XXXX-0003',
     inquiryDate: '2026-06-12',
     requirements: {
-      headcount: 50,
-      areaMin: 80,
-      areaMax: 160,
-      budgetMax: 180,
-      preferredArea: ['麻布台', '六本木'],
-      timeline: '即入居〜2026年8月',
-      priorities: ['ウェルネス環境', 'グリーン設計', '研究者採用'],
+      occasion: 'ウェルネス体験・福利厚生',
+      headcount: 30,
+      budgetNote: '10〜25万円',
+      preferredHills: ['麻布台'],
+      dateNote: '来月、土曜午前',
+      priorities: ['ウェルネス・健康', '緑・自然感', 'スタッフエンゲージメント'],
     },
   },
   {
@@ -390,13 +537,12 @@ export const customers: Customer[] = [
     phone: '090-XXXX-0004',
     inquiryDate: '2026-06-14',
     requirements: {
-      headcount: 35,
-      areaMin: 60,
-      areaMax: 120,
-      budgetMax: 100,
-      preferredArea: ['六本木'],
-      timeline: '2026年8月',
-      priorities: ['デザイン環境', 'クリエイター採用', 'エリアのブランド'],
+      occasion: 'メディア対応・PR・撮影',
+      headcount: 20,
+      budgetNote: '20〜80万円',
+      preferredHills: ['六本木', '虎ノ門'],
+      dateNote: '7〜8月、フレキシブル',
+      priorities: ['映える空間', 'アート感', '夜景・眺望', 'SNS映え'],
     },
   },
   {
@@ -407,13 +553,12 @@ export const customers: Customer[] = [
     phone: '090-XXXX-0005',
     inquiryDate: '2026-06-13',
     requirements: {
-      headcount: 120,
-      areaMin: 180,
-      areaMax: 380,
-      budgetMax: 500,
-      preferredArea: ['麻布台', '虎ノ門'],
-      timeline: '2026年9〜11月',
-      priorities: ['外国人エグゼクティブ受入', 'インターナショナル環境', 'ホテル近接'],
+      occasion: '顧客招待・施設ツアー',
+      headcount: 12,
+      budgetNote: '特になし（質重視）',
+      preferredHills: ['麻布台', '六本木'],
+      dateNote: '今月末',
+      priorities: ['外国語対応', '文化体験', 'ビジネスマッチング', 'ハイエンド'],
     },
   },
 ]
@@ -423,141 +568,142 @@ export const deals: Deal[] = [
     id: 'D001',
     customerId: 'C001',
     stage: 'proposal',
-    probability: 60,
-    nextAction: '提案書フォローアップ・BT内見日程調整',
+    probability: 65,
+    nextAction: 'ARCHホール 施設見学の日程調整',
     nextActionDate: '2026-06-18',
     assignee: '担当: 森川 洋介',
+    relatedFacilities: ['BT_ARCH_HALL'],
     timeline: [
-      { date: '2026-06-10', type: 'inquiry', title: '初回問い合わせ', detail: 'ウェブフォームより受信。「スタートアップが集まる環境重視」の旨。' },
-      { date: '2026-06-12', type: 'note', title: '電話ヒアリング実施', detail: '人数80名、2026年秋入居希望。予算感は月額280万円前後。虎ノ門BTのARCH環境に強い関心。' },
-      { date: '2026-06-15', type: 'proposal', title: 'BT-19B・BT-15A を提案送付', detail: 'HILLS Office概要 + 2区画の提案書を送付済み。先方レビュー中。' },
+      { date: '2026-06-10', type: 'inquiry', title: '初回問い合わせ', detail: '「150名規模の採用説明会を虎ノ門でやりたい」とウェブから問い合わせ。' },
+      { date: '2026-06-12', type: 'note', title: '電話ヒアリング', detail: 'スタートアップ感を重視。TOKYO NODEは規模感が大きすぎる→ARCHホールを提案する方向で合意。' },
+      { date: '2026-06-14', type: 'proposal', title: 'ARCHホール 提案書送付', detail: '施設概要・料金・過去採用イベント事例を添付して送付。先方確認中。' },
     ],
   },
   {
     id: 'D002',
     customerId: 'C002',
     stage: 'tour',
-    probability: 75,
-    nextAction: 'AZABU-12B 内見（6/20 14:00 予定）・条件確認',
+    probability: 80,
+    nextAction: '森美術館アフター貸切 + クラブ個室 最終確認',
     nextActionDate: '2026-06-20',
     assignee: '担当: 田村 美里',
+    relatedFacilities: ['MORI_MUSEUM', 'HILLS_CLUB'],
     timeline: [
-      { date: '2026-06-08', type: 'inquiry', title: '初回問い合わせ', detail: '代表取締役秘書より連絡。移転先として麻布台ヒルズを第一希望。' },
-      { date: '2026-06-10', type: 'note', title: '対面ヒアリング（本社）', detail: '200名規模、セキュリティ要件高め。麻布台ヒルズのブランドと緑環境を高評価。' },
-      { date: '2026-06-13', type: 'proposal', title: 'AZABU-12B・AZABU-14C 提案', detail: '2区画の比較提案書を提出。先方からAZABU-12Bに絞りたいとの回答。' },
-      { date: '2026-06-17', type: 'tour', title: '現地内見（予定）', detail: 'AZABU-12B の内見を設定中。意思決定者2名参加予定。' },
+      { date: '2026-06-08', type: 'inquiry', title: '初回問い合わせ', detail: '「8名でVIP接待。東京で最高の場所を使いたい」との依頼。外国人ゲスト2名含む。' },
+      { date: '2026-06-10', type: 'proposal', title: '2案提案送付', detail: 'A案: 森美術館アフター貸切→ヒルズクラブ個室ディナー / B案: 東京シティビュー→グランドハイアット宴会室。' },
+      { date: '2026-06-14', type: 'tour', title: '施設下見（先方担当者）', detail: 'A案の施設を下見。「美術館のアフター貸切からクラブへの流れが完璧」と高評価。' },
+      { date: '2026-06-18', type: 'negotiation', title: '最終条件確認（予定）', detail: '6/20に先方責任者への最終プレゼン予定。' },
     ],
   },
   {
     id: 'D003',
     customerId: 'C003',
     stage: 'inquiry',
-    probability: 40,
-    nextAction: '麻布台ヒルズのウェルネス機能詳細資料を追加送付',
+    probability: 45,
+    nextAction: '麻布台ヒルズ スパ＋屋上テラスの複合プラン提案',
     nextActionDate: '2026-06-16',
     assignee: '担当: 佐々木 健太',
+    relatedFacilities: ['AZABU_SPA', 'AZABU_ROOFTOP'],
     timeline: [
-      { date: '2026-06-12', type: 'inquiry', title: '初回問い合わせ', detail: 'ライフサイエンス系スタートアップ。「ウェルネス・緑環境」に強いこだわり。麻布台ヒルズを希望。' },
-      { date: '2026-06-14', type: 'note', title: '電話確認', detail: '予算は月180万円上限。50名。早ければ即入居希望。AZABU-8A が面積感マッチ。' },
+      { date: '2026-06-12', type: 'inquiry', title: '初回問い合わせ', detail: '「社員30名へのウェルネス体験をプレゼントしたい。緑のある環境で」との依頼。' },
+      { date: '2026-06-14', type: 'note', title: '予算・日程ヒアリング', detail: '予算は10〜25万円。来月土曜午前希望。スパ+屋上テラスのセット案を検討中。' },
     ],
   },
   {
     id: 'D004',
     customerId: 'C004',
     stage: 'proposal',
-    probability: 50,
-    nextAction: 'KEYAKI-6A 見積・KEYAKI内覧のアレンジ',
+    probability: 55,
+    nextAction: '東京シティビュー撮影プランの詳細資料送付',
     nextActionDate: '2026-06-19',
     assignee: '担当: 森川 洋介',
+    relatedFacilities: ['CITY_VIEW', 'AZABU_GALLERY'],
     timeline: [
-      { date: '2026-06-14', type: 'inquiry', title: '初回問い合わせ', detail: '代表より直接連絡。「けやき坂のブランド感が欲しい」。コンパクト区画希望。' },
-      { date: '2026-06-15', type: 'proposal', title: 'KEYAKI-6A 提案', detail: '90坪でコスト感もマッチ。先方のCOOが確認中。' },
+      { date: '2026-06-14', type: 'inquiry', title: '初回問い合わせ', detail: '新商品発表に使う映像・静止画の撮影ロケ地を探している。「東京の夜景×アート」が軸。' },
+      { date: '2026-06-15', type: 'proposal', title: '2施設提案', detail: '①東京シティビュー（夜景撮影） ②麻布台ヒルズギャラリー（アート空間撮影）の両施設を提案。' },
     ],
   },
   {
     id: 'D005',
     customerId: 'C005',
     stage: 'negotiation',
-    probability: 85,
-    nextAction: '最終条件確認・契約書ドラフト送付',
+    probability: 88,
+    nextAction: '最終ツアープログラム確定・請求書発行',
     nextActionDate: '2026-06-17',
     assignee: '担当: 田村 美里',
+    relatedFacilities: ['AZABU_GALLERY', 'AZABU_SPA', 'MORI_MUSEUM'],
     timeline: [
-      { date: '2026-06-13', type: 'inquiry', title: '初回問い合わせ', detail: 'ソウル本社から日本拠点設立を検討。外資系エグゼクティブの受入環境を重視。' },
-      { date: '2026-06-14', type: 'proposal', title: 'AZABU-12B・ST-22A 提案', detail: '英語対応資料を作成し提案。インターナショナルスクールとホテル近接を強調。' },
-      { date: '2026-06-15', type: 'tour', title: 'AZABU-12B 内見完了', detail: 'エグゼクティブ2名が来日し内見。即日「AZABU-12Bで進めたい」と回答。' },
-      { date: '2026-06-16', type: 'negotiation', title: '条件交渉開始', detail: 'フリーレント・IT工事サポートについて交渉中。大筋合意に近い状況。' },
+      { date: '2026-06-13', type: 'inquiry', title: '初回問い合わせ', detail: '「ソウルから役員12名が来日。麻布台と六本木を軸にフルデイのVIPツアーを組んでほしい」。' },
+      { date: '2026-06-14', type: 'proposal', title: 'VIPツアープログラム提案', detail: '麻布台ヒルズギャラリー見学→SPA体験→六本木森美術館アフター貸切→ヒルズクラブディナーの1日コース。' },
+      { date: '2026-06-15', type: 'tour', title: '事前下見対応', detail: '先方担当者が下見。スパとギャラリーを特に高評価。「このプランで進める」と内諾。' },
+      { date: '2026-06-16', type: 'negotiation', title: '最終条件調整中', detail: '全施設との調整が9割完了。予算・タイムラインを最終確認中。' },
     ],
   },
 ]
 
-// ── マッチングスコア計算ロジック ──────────────────────────────────────
+// ── マッチングロジック ─────────────────────────────────────────────────
 
-export interface MatchResult {
-  unit: Unit
-  building: Building
+export interface FacilityMatchResult {
+  facility: Facility
   score: number
   reasons: string[]
-  monthlyRent: number
 }
 
-export function calcMatch(customer: Customer, unit: Unit): MatchResult | null {
-  const building = buildings.find(b => b.id === unit.buildingId)
-  if (!building) return null
+export function matchFacilities(params: {
+  occasion: string
+  headcount: number
+  budgetRange: string
+  preferredHills: string[]
+  priorities: string[]
+}): FacilityMatchResult[] {
+  return facilities
+    .map(f => {
+      let score = 0
+      const reasons: string[] = []
 
-  let score = 0
-  const reasons: string[] = []
+      // 用途マッチ (35点)
+      if (f.occasions.includes(params.occasion)) {
+        score += 35
+        const occ = OCCASIONS.find(o => o.id === params.occasion)
+        if (occ) reasons.push(`用途「${occ.label}」に対応`)
+      }
 
-  // 面積マッチ (30点)
-  if (unit.area >= customer.requirements.areaMin && unit.area <= customer.requirements.areaMax) {
-    score += 30
-    reasons.push(`面積 ${unit.area}坪が要件範囲内（${customer.requirements.areaMin}〜${customer.requirements.areaMax}坪）`)
-  } else if (unit.area >= customer.requirements.areaMin * 0.8 && unit.area <= customer.requirements.areaMax * 1.2) {
-    score += 15
-    reasons.push(`面積は若干オーバー/アンダーだが許容範囲内の可能性あり`)
-  }
+      // 定員マッチ (25点)
+      if (params.headcount >= f.capacity.min && params.headcount <= f.capacity.max) {
+        score += 25
+        reasons.push(`定員 ${f.capacity.min}〜${f.capacity.max}名 → ${params.headcount}名に対応`)
+      } else if (params.headcount <= f.capacity.max * 1.2) {
+        score += 12
+        reasons.push(`定員上限に若干近いが対応可能な場合あり`)
+      }
 
-  // 予算マッチ (25点)
-  const monthlyRent = Math.round(unit.area * unit.rentPerTsubo)
-  if (monthlyRent <= customer.requirements.budgetMax) {
-    score += 25
-    reasons.push(`月額 ${monthlyRent}万円 ≤ 予算上限 ${customer.requirements.budgetMax}万円`)
-  } else if (monthlyRent <= customer.requirements.budgetMax * 1.15) {
-    score += 10
-    reasons.push(`月額 ${monthlyRent}万円（予算超過 ${Math.round((monthlyRent / customer.requirements.budgetMax - 1) * 100)}%）`)
-  }
+      // エリアマッチ (20点)
+      const areaMatch = params.preferredHills.length === 0 ||
+        params.preferredHills.some(a => f.buildingShort.includes(a) || f.buildingId.includes(a))
+      if (areaMatch) {
+        score += 20
+        reasons.push(`希望エリアに合致`)
+      }
 
-  // エリアマッチ (20点)
-  const areaMatch = customer.requirements.preferredArea.some(a =>
-    building.name.includes(a) || building.ward.includes(a)
-  )
-  if (areaMatch) {
-    score += 20
-    reasons.push(`希望エリア「${customer.requirements.preferredArea.join('・')}」に合致`)
-  }
+      // 今日の空き (10点)
+      const hasAvailToday = f.todaySlots.some(s => s.status === 'available')
+      if (f.status === 'available' || hasAvailToday) {
+        score += 10
+        reasons.push('本日空き枠あり')
+      }
 
-  // 即入居 / 入居時期マッチ (15点)
-  if (unit.status === 'available') {
-    score += 15
-    reasons.push('即入居可能')
-  } else if (unit.status === 'negotiating') {
-    score += 8
-  }
+      // 優先事項マッチ (10点)
+      const priorityHit = params.priorities.filter(p => {
+        const allText = [...f.salesPoints, ...f.features, f.description].join(' ')
+        return allText.includes(p)
+      })
+      if (priorityHit.length > 0) {
+        score += Math.min(10, priorityHit.length * 4)
+        reasons.push(`「${priorityHit[0]}」などのニーズに対応する施設特性あり`)
+      }
 
-  // 優先事項マッチ (10点)
-  const priorityMatch = customer.requirements.priorities.filter(p => {
-    const combined = [...building.services, ...building.differentiators, ...building.amenities].join(' ')
-    return combined.includes(p) || building.description.includes(p)
-  })
-  if (priorityMatch.length > 0) {
-    score += Math.min(10, priorityMatch.length * 4)
-    reasons.push(`優先事項「${priorityMatch.slice(0, 2).join('・')}」に対応する施設あり`)
-  }
-
-  return { unit, building, score: Math.min(score, 98), reasons, monthlyRent }
-}
-
-// 人数 → 推奨面積換算（1名あたり3〜4坪）
-export function calcRecommendedArea(headcount: number): { min: number; max: number } {
-  return { min: Math.round(headcount * 3), max: Math.round(headcount * 4) }
+      return { facility: f, score: Math.min(score, 99), reasons }
+    })
+    .filter(r => r.score >= 10)
+    .sort((a, b) => b.score - a.score)
 }

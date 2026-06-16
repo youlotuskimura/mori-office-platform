@@ -1,23 +1,23 @@
 import { useState } from 'react'
-import Dashboard from './Dashboard'
-import Matching from './Matching'
+import FacilityDashboard from './Dashboard'
+import OccasionSearch from './Matching'
 import Proposal from './Proposal'
-import BuildingInfo from './BuildingInfo'
+import FacilityDetail from './BuildingInfo'
 import CRM from './CRM'
 
-type Tab = 'dashboard' | 'matching' | 'proposal' | 'building' | 'crm'
+type Tab = 'dashboard' | 'search' | 'proposal' | 'detail' | 'crm'
 
 const tabs: { id: Tab; label: string; icon: string }[] = [
-  { id: 'dashboard', label: '空室', icon: '🏢' },
-  { id: 'matching', label: 'マッチング', icon: '🎯' },
-  { id: 'proposal', label: '提案生成', icon: '📄' },
-  { id: 'building', label: 'ビル情報', icon: '🗺️' },
-  { id: 'crm', label: '商談管理', icon: '📋' },
+  { id: 'dashboard', label: '施設状況', icon: '🏛️' },
+  { id: 'search',    label: '用途検索', icon: '🔍' },
+  { id: 'proposal',  label: '提案生成', icon: '📄' },
+  { id: 'detail',    label: '施設詳細', icon: '📖' },
+  { id: 'crm',       label: '商談管理', icon: '📋' },
 ]
 
 export default function App() {
   const [tab, setTab] = useState<Tab>('dashboard')
-  const [selectedUnits, setSelectedUnits] = useState<string[]>([])
+  const [selectedFacilities, setSelectedFacilities] = useState<string[]>([])
   const now = new Date().toLocaleString('ja-JP', {
     month: 'numeric',
     day: 'numeric',
@@ -25,8 +25,8 @@ export default function App() {
     minute: '2-digit',
   })
 
-  const toggleUnit = (id: string) =>
-    setSelectedUnits(prev =>
+  const toggleFacility = (id: string) =>
+    setSelectedFacilities(prev =>
       prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]
     )
 
@@ -63,9 +63,7 @@ export default function App() {
               key={t.id}
               onClick={() => setTab(t.id)}
               className={`relative flex min-w-0 flex-1 flex-col items-center gap-0.5 px-1 pb-2.5 pt-2 text-[11px] font-medium transition-colors ${
-                tab === t.id
-                  ? 'text-gold-400'
-                  : 'text-white/55 hover:text-white/85'
+                tab === t.id ? 'text-gold-400' : 'text-white/55 hover:text-white/85'
               }`}
             >
               {tab === t.id && (
@@ -73,9 +71,9 @@ export default function App() {
               )}
               <span className="text-[15px] leading-none">{t.icon}</span>
               <span className="whitespace-nowrap">{t.label}</span>
-              {t.id === 'proposal' && selectedUnits.length > 0 && (
+              {t.id === 'proposal' && selectedFacilities.length > 0 && (
                 <span className="absolute right-1.5 top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-gold-500 text-[9px] font-bold text-ink-900">
-                  {selectedUnits.length}
+                  {selectedFacilities.length}
                 </span>
               )}
             </button>
@@ -86,23 +84,26 @@ export default function App() {
       {/* コンテンツ */}
       <main className="pb-10">
         {tab === 'dashboard' && (
-          <Dashboard
-            selectedUnits={selectedUnits}
-            onToggleUnit={toggleUnit}
+          <FacilityDashboard
+            selectedFacilities={selectedFacilities}
+            onToggle={toggleFacility}
             onGoToProposal={goToProposal}
           />
         )}
-        {tab === 'matching' && (
-          <Matching
-            selectedUnits={selectedUnits}
-            onToggleUnit={toggleUnit}
+        {tab === 'search' && (
+          <OccasionSearch
+            selectedFacilities={selectedFacilities}
+            onToggle={toggleFacility}
             onGoToProposal={goToProposal}
           />
         )}
         {tab === 'proposal' && (
-          <Proposal selectedUnits={selectedUnits} onClearUnits={() => setSelectedUnits([])} />
+          <Proposal
+            selectedFacilities={selectedFacilities}
+            onClear={() => setSelectedFacilities([])}
+          />
         )}
-        {tab === 'building' && <BuildingInfo />}
+        {tab === 'detail' && <FacilityDetail />}
         {tab === 'crm' && <CRM />}
       </main>
     </div>
